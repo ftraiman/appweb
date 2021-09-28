@@ -1,0 +1,47 @@
+13-Sep-2021 09:40:59.324 INFO [main] org.apache.catalina.core.StandardServer.await A valid shutdown command was received via the shutdown port. Stopping the Server instance.
+13-Sep-2021 09:40:59.324 INFO [main] org.apache.coyote.AbstractProtocol.pause Pausing ProtocolHandler ["http-nio-8080"]
+13-Sep-2021 09:40:59.334 INFO [main] org.apache.catalina.core.StandardService.stopInternal Stopping service [Catalina]
+13-Sep-2021 09:40:59.353 INFO [main] org.apache.coyote.AbstractProtocol.stop Stopping ProtocolHandler ["http-nio-8080"]
+13-Sep-2021 09:40:59.358 INFO [main] org.apache.coyote.AbstractProtocol.destroy Destroying ProtocolHandler ["http-nio-8080"]
+13-Sep-2021 22:41:06.077 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version name:   Apache Tomcat/8.5.70
+13-Sep-2021 22:41:06.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server built:          Aug 9 2021 16:17:14 UTC
+13-Sep-2021 22:41:06.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Server version number: 8.5.70.0
+13-Sep-2021 22:41:06.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Name:               Mac OS X
+13-Sep-2021 22:41:06.080 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log OS Version:            10.16
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Architecture:          x86_64
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Java Home:             /Library/Java/JavaVirtualMachines/jdk1.8.0_111.jdk/Contents/Home/jre
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Version:           1.8.0_111-b14
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log JVM Vendor:            Oracle Corporation
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_BASE:         /Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70
+13-Sep-2021 22:41:06.081 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log CATALINA_HOME:         /Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.config.file=/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/conf/logging.properties
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djdk.tls.ephemeralDHKeySize=2048
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.protocol.handler.pkgs=org.apache.catalina.webresources
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dorg.apache.catalina.security.SecurityListener.UMASK=0027
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dignore.endorsed.dirs=
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.base=/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Dcatalina.home=/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.startup.VersionLoggerListener.log Command line argument: -Djava.io.tmpdir=/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/temp
+13-Sep-2021 22:41:06.082 INFO [main] org.apache.catalina.core.AprLifecycleListener.lifecycleEvent The Apache Tomcat Native library which allows using OpenSSL was not found on the java.library.path: [/Users/federico/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:.]
+13-Sep-2021 22:41:06.208 INFO [main] org.apache.coyote.AbstractProtocol.init Initializing ProtocolHandler ["http-nio-8080"]
+13-Sep-2021 22:41:06.232 INFO [main] org.apache.tomcat.util.net.NioSelectorPool.getSharedSelector Using a shared selector for servlet write/read
+13-Sep-2021 22:41:06.244 INFO [main] org.apache.catalina.startup.Catalina.load Initialization processed in 544 ms
+13-Sep-2021 22:41:06.279 INFO [main] org.apache.catalina.core.StandardService.startInternal Starting service [Catalina]
+13-Sep-2021 22:41:06.279 INFO [main] org.apache.catalina.core.StandardEngine.startInternal Starting Servlet engine: [Apache Tomcat/8.5.70]
+13-Sep-2021 22:41:06.286 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deploying deployment descriptor [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/conf/Catalina/localhost/web.xml]
+13-Sep-2021 22:41:06.575 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDescriptor Deployment of deployment descriptor [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/conf/Catalina/localhost/web.xml] has finished in [289] ms
+13-Sep-2021 22:41:06.576 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/docs]
+13-Sep-2021 22:41:06.591 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/docs] has finished in [15] ms
+13-Sep-2021 22:41:06.591 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/manager]
+13-Sep-2021 22:41:06.620 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/manager] has finished in [29] ms
+13-Sep-2021 22:41:06.620 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/examples]
+13-Sep-2021 22:41:06.867 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/examples] has finished in [247] ms
+13-Sep-2021 22:41:06.867 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/ROOT]
+13-Sep-2021 22:41:06.880 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/ROOT] has finished in [13] ms
+13-Sep-2021 22:41:06.880 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deploying web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/host-manager]
+13-Sep-2021 22:41:06.897 INFO [localhost-startStop-1] org.apache.catalina.startup.HostConfig.deployDirectory Deployment of web application directory [/Users/federico/ws/Java/innova/appweb/apache-tomcat-8.5.70/webapps/host-manager] has finished in [17] ms
+13-Sep-2021 22:41:06.900 INFO [main] org.apache.coyote.AbstractProtocol.start Starting ProtocolHandler ["http-nio-8080"]
+13-Sep-2021 22:41:06.908 INFO [main] org.apache.catalina.startup.Catalina.start Server startup in 664 ms
+13-Sep-2021 22:41:12.437 INFO [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/web] has started
+13-Sep-2021 22:41:12.501 INFO [http-nio-8080-exec-5] org.apache.catalina.core.StandardContext.reload Reloading Context with name [/web] is completed
