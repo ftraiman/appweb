@@ -16,11 +16,11 @@ public class ServletLogin extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String id = req.getParameter("email");
+        String email = req.getParameter("email");
         String clave = req.getParameter("clave");
-        System.err.println(id);
+        System.err.println(email);
         Usuario usuario = new Usuario();
-        usuario.setNickname(id);
+        usuario.setNickname(email);
 
         HttpSession session = req.getSession();
         session.setAttribute("usuario", usuario);
