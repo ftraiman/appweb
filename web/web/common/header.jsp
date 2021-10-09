@@ -1,9 +1,8 @@
-<%@page import="edu.innova.webapp.entidades.Usuario"%>
+<%@page import="edu.innova.webapp.dtos.UsuarioDTO"%>
 <%@page import="edu.innova.webapp.servlets.ServletLogin"%>
 
 <%
-    Usuario usuario = ServletLogin.getUsuarioLogueado(request);
-
+    UsuarioDTO usuario = ServletLogin.getUsuarioLogueado(request);
 %>
 
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
@@ -27,7 +26,6 @@
                     <%
                         if (usuario != null) {
                     %>
-
                     <span class="d-sm-inline d-none"><%= usuario.getNickname()%></span>
                     <form action="/web/login" method="GET">
                         <input type="hidden" value="logout" name="logout">

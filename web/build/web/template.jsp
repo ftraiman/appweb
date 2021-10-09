@@ -23,6 +23,8 @@
         <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
         <link id="pagestyle" href="/web/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+        
+        <script src="/web/assets/js/jquery.js"></script>
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">

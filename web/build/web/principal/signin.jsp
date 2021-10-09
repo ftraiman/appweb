@@ -1,8 +1,13 @@
+<%@page import="edu.innova.webapp.helpers.Constantes"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
     String carpeta = "Principal";
     String pagina = "Alta Usuario";
 %>
+<% 
+String path = request.getContextPath(); 
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
+%> 
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -43,31 +48,27 @@
                             <div class="form-group" style="text-align: center">
                                 <h1>Alta de Usuario</h1>
                             </div>
-                            <form role="form" method="POST" action="/web/altausuario">
+                            <%  if (request.getAttribute(Constantes.ERROR) != null) { %>
+                                <div class="alert alert-warning" role="alert">
+                                    <%= request.getAttribute("error") %>
+                                </div>
+                            <%  }  %>
+                            <form role="form" method="POST" action="/web/altausuario" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label for="nickname">Nickname</label>
-                                    <input name="nickname" type="text" class="form-control" id="nickname">
-
-                                    <% if (request.getAttribute("errorNickname") != null) {
-                                    %>
-                                    <label>
-                                      <%=request.getAttribute("errorNickname") %>  
-                                    </label>
-                                    <%
-                                        }
-                                    %>
+                                    <input name="nickname" type="text" class="form-control" id="nickname" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nombre">Nombre</label>
-                                    <input name="nombre" type="text" class="form-control" id="nombre">
+                                    <input name="nombre" type="text" class="form-control" id="nombre" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="nombre">Apellido</label>
-                                    <input name="apellido" type="text" class="form-control" id="apellido">
+                                    <input name="apellido" type="text" class="form-control" id="apellido" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="fechanacimiento">Fecha de nacimiento</label>
-                                    <input name="fechanacimiento" type="date" class="form-control" id="fechanacimiento">
+                                    <input name="fechanacimiento" type="date" class="form-control" id="fechanacimiento" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlSelect1">Seleccionar tipo de usuario</label>
@@ -90,14 +91,18 @@
                                         <input name="link" type="text" class="form-control" id="link">
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label for="imagen">Foto</label>
+                                    <input name="imagen" type="file" class="form-control-file" id="imagen">
+                                </div>
 
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input name="email" type="email" class="form-control" id="email">
+                                    <input name="email" type="email" class="form-control" id="email" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <input name="password" type="password" class="form-control" id="password">
+                                    <input name="password" type="password" class="form-control" id="password" required>
                                 </div>
                                 <div class="form-group" style="text-align: center">
                                     <button type="submit" class="btn btn-primary">Alta de usuario</button>
@@ -106,7 +111,7 @@
                             </form>
                         </div>
                         <div class="col-sm-2">
-
+<!--                               <img src="/web/imagenes?carpeta=usuarios&archivo=2.png"> -->
                         </div>
                     </div>
                 </div>
@@ -119,7 +124,10 @@
                                 $('#datosAdicionales').removeClass("show");
                             }
                         });
-
+                        $('#nickname').blur(function () {
+                            this.value = this.value.toLowerCase();
+                            this.value = this.value.replaceAll(" ", "");
+                        });                                                     
                     });
                 </script>
 

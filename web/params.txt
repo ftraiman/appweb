@@ -1,0 +1,3 @@
+DB_URL=jdbc:mysql://localhost/coronatickets
+USER=root
+PASS=

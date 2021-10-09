@@ -3,7 +3,8 @@ package org.apache.jsp.principal;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import edu.innova.webapp.entidades.Usuario;
+import edu.innova.webapp.helpers.Constantes;
+import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.servlets.ServletLogin;
 
 public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
@@ -51,11 +52,17 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       _jspx_resourceInjector = (org.glassfish.jsp.api.ResourceInjector) application.getAttribute("com.sun.appserv.jsp.resource.injector");
 
       out.write('\n');
+      out.write('\n');
 
     String carpeta = "Principal";
-    String pagina = "Inicio";
+    String pagina = "Alta Usuario";
 
-      out.write("\n");
+      out.write('\n');
+ 
+String path = request.getContextPath(); 
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/"; 
+
+      out.write(" \n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html lang=\"en\">\n");
       out.write("    <head>\n");
@@ -95,7 +102,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("    <div class=\"collapse navbar-collapse  w-auto  max-height-vh-100 h-100\" id=\"sidenav-collapse-main\">\n");
       out.write("      <ul class=\"navbar-nav\">\n");
       out.write("        <li class=\"nav-item\">\n");
-      out.write("          <a class=\"nav-link  active\" href=\"../pages/dashboard.html\">\n");
+      out.write("          <a class=\"nav-link  active\" href=\"/web/usuario/miperfil.jsp\">\n");
       out.write("            <div class=\"icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center\">\n");
       out.write("              <svg width=\"12px\" height=\"12px\" viewBox=\"0 0 45 40\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n");
       out.write("                <title>shop </title>\n");
@@ -111,11 +118,11 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </g>\n");
       out.write("              </svg>\n");
       out.write("            </div>\n");
-      out.write("            <span class=\"nav-link-text ms-1\">Dashboard</span>\n");
+      out.write("            <span class=\"nav-link-text ms-1\">Mi perfil</span>\n");
       out.write("          </a>\n");
       out.write("        </li>\n");
       out.write("        <li class=\"nav-item\">\n");
-      out.write("          <a class=\"nav-link  \" href=\"../pages/tables.html\">\n");
+      out.write("          <a class=\"nav-link  \" href=\"/web/usuario/miperfil.jsp\">\n");
       out.write("            <div class=\"icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center\">\n");
       out.write("              <svg width=\"12px\" height=\"12px\" viewBox=\"0 0 42 42\" version=\"1.1\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\">\n");
       out.write("                <title>office</title>\n");
@@ -289,8 +296,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
 
-    Usuario usuario = ServletLogin.getUsuarioLogueado(request);
-
+    UsuarioDTO usuario = ServletLogin.getUsuarioLogueado(request);
 
       out.write("\n");
       out.write("\n");
@@ -322,7 +328,6 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
 
                         if (usuario != null) {
                     
-      out.write("\n");
       out.write("\n");
       out.write("                    <span class=\"d-sm-inline d-none\">");
       out.print( usuario.getNickname());
@@ -369,37 +374,33 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <div class=\"form-group\" style=\"text-align: center\">\n");
       out.write("                                <h1>Alta de Usuario</h1>\n");
       out.write("                            </div>\n");
-      out.write("                            <form role=\"form\" method=\"POST\" action=\"/web/altausuario\">\n");
+      out.write("                            ");
+  if (request.getAttribute(Constantes.ERROR) != null) { 
+      out.write("\n");
+      out.write("                                <div class=\"alert alert-warning\" role=\"alert\">\n");
+      out.write("                                    ");
+      out.print( request.getAttribute("error") );
+      out.write("\n");
+      out.write("                                </div>\n");
+      out.write("                            ");
+  }  
+      out.write("\n");
+      out.write("                            <form role=\"form\" method=\"POST\" action=\"/web/altausuario\" enctype=\"multipart/form-data\">\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"nickname\">Nickname</label>\n");
-      out.write("                                    <input name=\"nickname\" type=\"text\" class=\"form-control\" id=\"nickname\">\n");
-      out.write("\n");
-      out.write("                                    ");
- if (request.getAttribute("errorNickname") != null) {
-                                    
-      out.write("\n");
-      out.write("                                    <label>\n");
-      out.write("                                      ");
-      out.print(request.getAttribute("errorNickname") );
-      out.write("  \n");
-      out.write("                                    </label>\n");
-      out.write("                                    ");
-
-                                        }
-                                    
-      out.write("\n");
+      out.write("                                    <input name=\"nickname\" type=\"text\" class=\"form-control\" id=\"nickname\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"nombre\">Nombre</label>\n");
-      out.write("                                    <input name=\"nombre\" type=\"text\" class=\"form-control\" id=\"nombre\">\n");
+      out.write("                                    <input name=\"nombre\" type=\"text\" class=\"form-control\" id=\"nombre\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"nombre\">Apellido</label>\n");
-      out.write("                                    <input name=\"apellido\" type=\"text\" class=\"form-control\" id=\"apellido\">\n");
+      out.write("                                    <input name=\"apellido\" type=\"text\" class=\"form-control\" id=\"apellido\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"fechanacimiento\">Fecha de nacimiento</label>\n");
-      out.write("                                    <input name=\"fechanacimiento\" type=\"date\" class=\"form-control\" id=\"fechanacimiento\">\n");
+      out.write("                                    <input name=\"fechanacimiento\" type=\"date\" class=\"form-control\" id=\"fechanacimiento\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"exampleFormControlSelect1\">Seleccionar tipo de usuario</label>\n");
@@ -422,14 +423,18 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                        <input name=\"link\" type=\"text\" class=\"form-control\" id=\"link\">\n");
       out.write("                                    </div>\n");
       out.write("                                </div>\n");
+      out.write("                                <div class=\"form-group\">\n");
+      out.write("                                    <label for=\"imagen\">Foto</label>\n");
+      out.write("                                    <input name=\"imagen\" type=\"file\" class=\"form-control-file\" id=\"imagen\">\n");
+      out.write("                                </div>\n");
       out.write("\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"email\">Email</label>\n");
-      out.write("                                    <input name=\"email\" type=\"email\" class=\"form-control\" id=\"email\">\n");
+      out.write("                                    <input name=\"email\" type=\"email\" class=\"form-control\" id=\"email\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\">\n");
       out.write("                                    <label for=\"password\">Password</label>\n");
-      out.write("                                    <input name=\"password\" type=\"password\" class=\"form-control\" id=\"password\">\n");
+      out.write("                                    <input name=\"password\" type=\"password\" class=\"form-control\" id=\"password\" required>\n");
       out.write("                                </div>\n");
       out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
       out.write("                                    <button type=\"submit\" class=\"btn btn-primary\">Alta de usuario</button>\n");
@@ -438,7 +443,7 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </form>\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"col-sm-2\">\n");
-      out.write("\n");
+      out.write("<!--                               <img src=\"/web/imagenes?carpeta=usuarios&archivo=2.png\"> -->\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
@@ -451,7 +456,10 @@ public final class signin_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                                $('#datosAdicionales').removeClass(\"show\");\n");
       out.write("                            }\n");
       out.write("                        });\n");
-      out.write("\n");
+      out.write("                        $('#nickname').blur(function () {\n");
+      out.write("                            this.value = this.value.toLowerCase();\n");
+      out.write("                            this.value = this.value.replaceAll(\" \", \"\");\n");
+      out.write("                        });                                                     \n");
       out.write("                    });\n");
       out.write("                </script>\n");
       out.write("\n");

@@ -136,10 +136,24 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <div class=\"mb-3\">\n");
       out.write("                        <input id=\"clave\" name=\"clave\" type=\"password\" class=\"form-control\" placeholder=\"Password\" aria-label=\"Password\" aria-describedby=\"password-addon\">\n");
       out.write("                    </div>\n");
-      out.write("                    <div class=\"form-check form-switch\">\n");
+      out.write("<!--                    <div class=\"form-check form-switch\">\n");
       out.write("                      <input class=\"form-check-input\" type=\"checkbox\" id=\"rememberMe\" checked=\"\">\n");
       out.write("                      <label class=\"form-check-label\" for=\"rememberMe\">Recordar mi usuario</label>\n");
-      out.write("                    </div>\n");
+      out.write("                    </div>-->\n");
+      out.write("                    ");
+ 
+                        if (request.getParameter("error") != null) {    
+                    
+      out.write("\n");
+      out.write("                        <div class=\"alert alert-warning\" role=\"alert\">\n");
+      out.write("                            ");
+      out.print( request.getParameter("error") );
+      out.write("\n");
+      out.write("                        </div>\n");
+      out.write("                    ");
+  }  
+      out.write("\n");
+      out.write("                    \n");
       out.write("                    <div class=\"text-center\">\n");
       out.write("                        <button  type=\"submit\" class=\"btn bg-gradient-info w-100 mt-4 mb-0\">Sign in</button>\n");
       out.write("                    </div>\n");
