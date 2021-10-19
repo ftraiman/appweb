@@ -12,3 +12,4 @@ apache-tomcat-8.5.70/*
 /apache-tomcat-8.5.70/work/Catalina/localhost/web/org/apache/jsp/principal/signin_jsp.java
 /web/.idea/
 /web/nbproject/
+/web/dist/

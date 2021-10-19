@@ -6,7 +6,7 @@ import edu.innova.webapp.helpers.HelperFechas;
 import edu.innova.webapp.helpers.HelperImagenes;
 import edu.innova.webapp.helpers.HelperImagenes.CarpetaDestinoImagenes;
 import edu.innova.webapp.logica.servicios.ServicioUsuarios;
-import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppWebImpl;
+import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
@@ -23,7 +23,7 @@ import javax.servlet.http.Part;
 public class ServletAltaUsuario extends HttpServlet {
 
     HelperImagenes helperImagenes = HelperImagenes.getInstance();
-    ServicioUsuarios servicioUsuarios = ServicioUsuariosAppWebImpl.getInstance();
+    ServicioUsuarios servicioUsuarios = ServicioUsuariosAppSwingImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,14 +52,14 @@ public class ServletAltaUsuario extends HttpServlet {
         try {
             UsuarioDTO usuario = new UsuarioDTO(null, tipo, nickname, nombre, apellido, email, fechaNacimiento, descripcion, biografia, link, clave, imagen);
             servicioUsuarios.guardarNuevoUsuario(usuario);
+            req.getRequestDispatcher("principal/login.jsp").forward(req, resp);
+            return;
+            
         } catch (InnovaModelException e) {
             req.setAttribute("error", e.getMessage());
             req.getRequestDispatcher("principal/signin.jsp").forward(req, resp);
             return;
         }
-
-        RequestDispatcher view = req.getRequestDispatcher("principal/signin.jsp");
-        view.forward(req, resp);
     }
 
     @Override

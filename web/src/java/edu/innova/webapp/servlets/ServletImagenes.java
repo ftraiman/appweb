@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "imagenes", urlPatterns = {"/imagenes"})
 public class ServletImagenes extends HttpServlet {
-    
+
     HelperProperties helperProperties = new HelperProperties().getInstance();
 
     @Override
@@ -27,14 +27,20 @@ public class ServletImagenes extends HttpServlet {
 
         HelperImagenes helperImagenes = HelperImagenes.getInstance();
 
-        String carpeta = request.getParameter("carpeta")
-                .equalsIgnoreCase("usuarios")
-                ? helperImagenes.getCarpetaDestino(CarpetaDestinoImagenes.USUARIOS)
-                : helperImagenes.getCarpetaDestino(CarpetaDestinoImagenes.ESPECTACULOS);
+        String carpeta= "";
+        switch (request.getParameter("carpeta")) {
+            case "usuarios":
+                carpeta = helperImagenes.getCarpetaDestino(CarpetaDestinoImagenes.USUARIOS);
+                break;
+            case "espectaculos":
+                carpeta = helperImagenes.getCarpetaDestino(CarpetaDestinoImagenes.ESPECTACULOS);
+                break;
+            case "paquetes":
+                carpeta = helperImagenes.getCarpetaDestino(CarpetaDestinoImagenes.PAQUETES);
+                break;
+        }
 
         String archivo = request.getParameter("archivo");
-
-//        response.setContentType("image/png");
 
         FileInputStream fin = new FileInputStream(helperProperties.getRUTA_PROYECTO() + File.separator + carpeta + File.separator + archivo);
 

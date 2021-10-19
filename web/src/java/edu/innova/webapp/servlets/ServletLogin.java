@@ -5,7 +5,7 @@ import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.exceptions.InnovaModelException;
 import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.logica.servicios.ServicioUsuarios;
-import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppWebImpl;
+import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "login", urlPatterns = {"/login"})
 public class ServletLogin extends HttpServlet {
     
-    private ServicioUsuarios servicioUsuarios = ServicioUsuariosAppWebImpl.getInstance();
+    private ServicioUsuarios servicioUsuarios = ServicioUsuariosAppSwingImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -49,6 +49,17 @@ public class UsuarioDTO {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    // Constructor para la parte de seguidores
+    public UsuarioDTO(Long id, String tipo, String nickname, String nombre, String apellido, String imagen) {
+        this.id = id;
+        this.tipo = tipo;
+        this.nickname = nickname;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.imagen = imagen;
+    }
+
+    
     public Long getId() {
         return id;
     }

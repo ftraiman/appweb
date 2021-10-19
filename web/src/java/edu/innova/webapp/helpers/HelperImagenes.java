@@ -9,12 +9,22 @@ import javax.servlet.http.Part;
 
 public class HelperImagenes {
 
-    HelperProperties helperProperties = new HelperProperties().getInstance();
+    private HelperProperties helperProperties = new HelperProperties().getInstance();
 
     private static HelperImagenes instance;
+    
+     private HelperImagenes() {
+    }
+
+    public static HelperImagenes getInstance() {
+        if (instance == null) {
+            instance = new HelperImagenes();
+        }
+        return instance;
+    }
 
     public enum CarpetaDestinoImagenes {
-        USUARIOS, ESPECTACULOS
+        USUARIOS, ESPECTACULOS, PAQUETES
     };
 
     public boolean guardarImagen(Part filePart, CarpetaDestinoImagenes destino, String nombreImagen) {
@@ -50,22 +60,14 @@ public class HelperImagenes {
         return true;
     }
 
-    private HelperImagenes() {
-    }
-
-    public static HelperImagenes getInstance() {
-        if (instance == null) {
-            instance = new HelperImagenes();
-        }
-        return instance;
-    }
-
     public String getCarpetaDestino(CarpetaDestinoImagenes carpetaDestinoImagenes) {
         switch (carpetaDestinoImagenes) {
             case USUARIOS:
                 return helperProperties.getRUTA_USUARIO();
             case ESPECTACULOS:
                 return helperProperties.getRUTA_ESPECTACULOS();
+            case PAQUETES:
+                return helperProperties.getRUTA_PAQUETES();
             default:
                 return null;
         }

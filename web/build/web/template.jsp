@@ -23,7 +23,7 @@
         <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
         <link id="pagestyle" href="/web/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
-        
+
         <script src="/web/assets/js/jquery.js"></script>
     </head>
 
@@ -36,12 +36,13 @@
             <!-- End Navbar -->
             <div class="container-fluid py-4">
                 <div class="row mt-4">
-                   
+
                 </div>
-               
-                
-                <%@include file="../common/footer.jsp" %>
+
+
+
             </div>
+            <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->
         <script src="/web/assets/js/core/popper.min.js"></script>
@@ -58,8 +59,8 @@
                 Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
             }
         </script>
-<!--         Github buttons 
-        <script async defer src="https://buttons.github.io/buttons.js"></script>-->
+        <!--         Github buttons 
+                <script async defer src="https://buttons.github.io/buttons.js"></script>-->
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
         <script src="/web/assets/js/soft-ui-dashboard.min.js"></script>
     </body>

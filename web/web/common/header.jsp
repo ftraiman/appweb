@@ -32,14 +32,19 @@
                         <button  type="submit" id="link-button" style=" background: none; border: none; color: #1a0dab; text-decoration: underline; cursor: pointer;"> Log out</button>
                     </form>
                     <% } else { %>
-                        <i class="fa fa-user me-sm-1"></i>
-                        <a href="/web/principal/login.jsp" class="nav-link text-body font-weight-bold px-0">
-                            <span class="d-sm-inline d-none">Log in</span>
+                    <i class="fa fa-user me-sm-1"></i>
+                    <a href="/web/usuario/login.jsp" class="nav-link text-body font-weight-bold px-0">
+                        <span class="d-sm-inline d-none">Log in</span>
+                    </a> /
+                    <a href="/web/usuario/alta.jsp" class="nav-link text-body font-weight-bold px-0">
+                        <span class="d-sm-inline d-none">Registrarse</span>
+                    </a>
+                    
                     <%
                         }
                     %>
 
-                    </a>
+
                 </li>
                 <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
                     <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">

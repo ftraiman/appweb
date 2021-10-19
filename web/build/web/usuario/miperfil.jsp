@@ -1,4 +1,10 @@
-<%@page import="edu.innova.logica.Constantes"%>
+<%@page import="edu.innova.webapp.dtos.EspectaculosDeUsuario"%>
+<%@page import="edu.innova.webapp.servlets.ServletInformacionUsuario"%>
+<%@page import="edu.innova.webapp.helpers.Constantes"%>
+<%@page import="edu.innova.webapp.dtos.EspectaculoDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="edu.innova.webapp.servlets.ServletModificarUsuario"%>
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="edu.innova.webapp.dtos.UsuarioDTO"%>
 <%@page import="edu.innova.webapp.helpers.HelperFechas"%>
@@ -11,6 +17,11 @@
         response.sendRedirect("/web/principal/index.jsp");
         return;
     }
+    String tipoUsuario = u.getTipo();
+    List<UsuarioDTO> usuariosQueSigue = ServletModificarUsuario.getUsuariosSeguidos(request);
+    EspectaculosDeUsuario espectaculosDeUsuario = ServletInformacionUsuario.getEspectaculosDeUsuarioPorIdArtista(u.getId());
+
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,7 +73,7 @@
                                             <p class="mb-5"><b><%=u.getBiografia()%></b></p>
                                             <h6 class="font-weight-bolder">Link</h6>
                                             <p class="mb-5"><b><%=u.getLinkUsuario()%></b></p>
-                                            <% }%>
+                                                    <% }%>
 
                                         </div>
                                     </div>
@@ -75,12 +86,13 @@
                             </div>
                         </div>
                     </div>
+                    <!--modificar datos-->
                     <div class="col-lg-5">
                         <div class="card p-3">
                             <div class="overflow-hidden position-relative border-radius-lg bg-cover h-100" id="collapseExample" >
                                 <span class=""></span>
                                 <h4 style="text-align: center">Modificar datos</h4>
-                                <form role="form" method="POST" action="/web/altausuario" enctype="multipart/form-data">
+                                <form role="form" method="POST" action="/web/modificarusuario" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="nombre">Nombre</label>
                                         <input name="nombre" type="text" class="form-control" id="nombre" value="<%=u.getNombre()%>" required>
@@ -91,9 +103,9 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="fechanacimiento">Fecha de nacimiento</label>
-                                        <input name="fechanacimiento" type="date" class="form-control" id="fechanacimiento" value="<%= HelperFechas.dateToString(u.getFechaNacimiento(), "yyyy-MM-dd") %>" required>
+                                        <input name="fechanacimiento" type="date" class="form-control" id="fechanacimiento" value="<%= HelperFechas.dateToString(u.getFechaNacimiento(), "yyyy-MM-dd")%>" required>
                                     </div>
-                                    <div id="datosAdicionales" class="collapse <%= Constantes.ARTISTA.equalsIgnoreCase(u.getTipo()) ? "show" : "" %>"> 
+                                    <div id="datosAdicionales" class="collapse <%= Constantes.ARTISTA.equalsIgnoreCase(u.getTipo()) ? "show" : ""%>"> 
                                         <div class="form-group">
                                             <label for="descripcion">Descripción</label>
                                             <input name="descripcion" type="text" class="form-control" value="<%=u.getDescripcion()%>" id="descripcion">
@@ -110,17 +122,135 @@
                                     <div class="form-group" style="text-align: center">
                                         <button type="submit" class="btn btn-primary">Modificar usuario</button>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                         </div>
                     </div>
                 </div>
-                                        
-
-
-                <%@include file="../common/footer.jsp" %>
             </div>
+            <!--Usuarios que sigue-->
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0">Usuarios que sigo</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (usuariosQueSigue.size() > 0) {
+                                            for (UsuarioDTO usuarioqueSigue : usuariosQueSigue) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=usuarios&archivo=<%=usuarioqueSigue.getImagen()%>" alt="<%=usuarioqueSigue.getNickname()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=usuarioqueSigue.getNickname()%></h6>
+                                            <p class="mb-0 text-xs"><%=usuarioqueSigue.getNombre()%> <%=usuarioqueSigue.getApellido()%></p>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/modificarusuario?dejardeseguir=<%=usuarioqueSigue.getId()%>">Dejar de seguir</a>
+                                        <!--<a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/modificarusuario">Dejar de seguir</a>-->
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Bloque espectaculos-->
+            <% if (Constantes.ARTISTA.equalsIgnoreCase(tipoUsuario)) { %>
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Espectaculos Ingresados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (espectaculosDeUsuario.getEspectaculosIngresados().size() > 0) {
+                                            for (EspectaculoDTO e : espectaculosDeUsuario.getEspectaculosIngresados()) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=e.getImagen()%>" alt="<%=e.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=e.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
+                                        </div>
+                                        <!--<a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/modificarusuario?dejardeseguir=<%=e.getId()%>">Dejar de seguir</a>-->
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: greenyellow">Espectaculos Aceptados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (espectaculosDeUsuario.getEspectaculosAceptados().size() > 0) {
+                                            for (EspectaculoDTO e : espectaculosDeUsuario.getEspectaculosAceptados()) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=e.getImagen()%>" alt="<%=e.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=e.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/funcion/alta.jsp?idEspectaculo=<%=e.getId()%>">Agregar Función</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: floralwhite">Espectaculos Rechazados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (espectaculosDeUsuario.getEspectaculosRechazados().size() > 0) {
+                                            for (EspectaculoDTO e : espectaculosDeUsuario.getEspectaculosRechazados()) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=e.getImagen()%>" alt="<%=e.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=e.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
+                                        </div>
+                                        <!--<a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/modificarusuario?dejardeseguir=<%=e.getId()%>">Dejar de seguir</a>-->
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                    }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <% }%>
+            <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->
         <script src="/web/assets/js/core/popper.min.js"></script>
