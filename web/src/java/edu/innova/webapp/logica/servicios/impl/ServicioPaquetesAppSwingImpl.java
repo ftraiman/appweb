@@ -21,7 +21,8 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
     private static final FuncionControlador funcionControlador = new FuncionControladorImpl().getInstance();
     private static final PaqueteControlador paqueteControlador = new PaqueteControladorImpl().getInstance();
 
-    private ServicioPaquetesAppSwingImpl() {}
+    private ServicioPaquetesAppSwingImpl() {
+    }
 
     public static ServicioPaquetesAppSwingImpl getInstance() {
         if (instance == null) {
@@ -31,8 +32,8 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
     }
 
     @Override
-    public void altaPaquete(PaqueteDTO paquete) {
-        paqueteControlador.altaPaqueteDTO(paqueteDTOMapper(paquete));
+    public void altaPaquete(PaqueteDTO paquete, Long idArtista) {
+        paqueteControlador.altaPaqueteDTO(paqueteDTOMapper(paquete), idArtista);
     }
 
     @Override
@@ -57,12 +58,17 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
                 e.getEspectadoresMaximos(), e.getUrl(), e.getCosto(), e.getFechaRegistro(), new ArrayList<FuncionDTO>(), e.getEstado(), e.getIdCategoria(), e.getImagen()))
                 .collect(Collectors.toList());
     }
-    
+
     @Override
     public void altaEspectaculoEnPaquete(Long idEspectaculo, Long idPaquete) {
         paqueteControlador.altaPaqueteDTOEspectaculo(idPaquete, idEspectaculo);
     }
-    
+
+    @Override
+    public void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete) {
+        paqueteControlador.altaUsuarioEnPaquete(idUsuario, idPaquete);
+    }
+
     @Override
     public List<PaqueteDTO> getPaquetesPorIdEspectaculo(Long idEspectaculo) {
         return paqueteControlador.getPaqueteDTOPorIdEspectaculo(idEspectaculo)
@@ -70,7 +76,15 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
                 .map(this::paqueteDTOMapper)
                 .collect(Collectors.toList());
     }
-    
+
+    @Override
+    public List<PaqueteDTO> getPaquetesCompradosPorIdUsuario(Long idUsuario) {
+        return paqueteControlador.getPaquetesContratadosPorIdUsuario(idUsuario)
+                .stream()
+                .map(this::paqueteDTOMapper)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public List<PaqueteDTO> getTodosLosPaquetes() {
         return paqueteControlador.getTodosLosPaquetesDTO()

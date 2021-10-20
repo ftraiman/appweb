@@ -1,3 +1,6 @@
+<%@page import="edu.innova.webapp.dtos.PaqueteDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="edu.innova.webapp.servlets.ServletPaquete"%>
 <%@page import="edu.innova.webapp.dtos.EspectaculosDeUsuario"%>
 <%@page import="edu.innova.webapp.servlets.ServletInformacionUsuario"%>
 <%@page import="edu.innova.webapp.helpers.Constantes"%>
@@ -20,7 +23,8 @@
     String tipoUsuario = u.getTipo();
     List<UsuarioDTO> usuariosQueSigue = ServletModificarUsuario.getUsuariosSeguidos(request);
     EspectaculosDeUsuario espectaculosDeUsuario = ServletInformacionUsuario.getEspectaculosDeUsuarioPorIdArtista(u.getId());
-
+    List<PaqueteDTO> paquetesCreadosPorArtista = Constantes.ARTISTA.equalsIgnoreCase(tipoUsuario) ? ServletPaquete.getPaquetesPorIdUsuario(u.getId()) : new ArrayList<PaqueteDTO>();
+    List<PaqueteDTO> paquetesCompradosPorUsuario = ServletPaquete.getPaquetesCompradosPorIdUsuario(u.getId());
 
 %>
 <!DOCTYPE html>
@@ -241,7 +245,7 @@
                                         <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
                                     </li>
                                     <% }
-                                    }%>
+                                        }%>
                                 </ul>
                             </div>
                         </div>
@@ -250,6 +254,67 @@
                 </div>
             </div>
             <% }%>
+            <!--Bloque paquetes-->
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <% if (Constantes.ARTISTA.equalsIgnoreCase(tipoUsuario)) { %>
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Mis Paquetes creados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (paquetesCreadosPorArtista.size() > 0) {
+                                            for (PaqueteDTO i : paquetesCreadosPorArtista) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=paquetes&archivo=<%=i.getImagen()%>" alt="<%=i.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=i.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=i.getDescripcion()%></p>
+                                            <p class="mb-0 text-xs">Descuento: <%=i.getDescuento()%> %</p>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/paquete/detalle.jsp?idPaquete=<%=i.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <% } %>
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Mis Paquetes comprados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (paquetesCompradosPorUsuario.size() > 0) {
+                                            for (PaqueteDTO i : paquetesCompradosPorUsuario) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/web/imagenes?carpeta=paquetes&archivo=<%=i.getImagen()%>" alt="<%=i.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=i.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=i.getDescripcion()%></p>
+                                            <p class="mb-0 text-xs">Descuento: <%=i.getDescuento()%> %</p>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/paquete/detalle.jsp?idPaquete=<%=i.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->

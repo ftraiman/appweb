@@ -53,6 +53,11 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
     public void altaFuncion(FuncionDTO funcion) {
         funcionControlador.altaFuncionDTO(funcionMapper(funcion));
     }
+    
+    @Override
+    public FuncionDTO getFuncionPorId(Long idFuncion) {
+        return funcionMapper(funcionControlador.getFuncionDTOPorId(idFuncion));
+    }
 
     @Override
     public List<EspectaculoDTO> getEspectaculosPorCategoriaPlataforma(Long idPlataforma, Long idCategoria) {

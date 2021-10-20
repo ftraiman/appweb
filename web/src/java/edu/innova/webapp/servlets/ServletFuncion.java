@@ -1,6 +1,8 @@
 package edu.innova.webapp.servlets;
 
+import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
+import edu.innova.webapp.dtos.InformacionFuncionDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.helpers.HelperFechas;
@@ -81,5 +83,18 @@ public class ServletFuncion extends HttpServlet {
         artistaOrganizador.setId(idArtistaOrganizador);
         artistas.remove(artistaOrganizador);
         return artistas;
+    }
+    
+    public static InformacionFuncionDTO getInformacionFuncion(Long idFuncion) {
+        InformacionFuncionDTO informacionFuncion = new InformacionFuncionDTO();
+        FuncionDTO funcion = servicioEspectaculos.getFuncionPorId(idFuncion);
+        EspectaculoDTO espectaculo = servicioEspectaculos.getEspectaculoPorId(funcion.getIdEspectaculo());
+        UsuarioDTO artista = servicioUsuarios.getUsuarioPorId(espectaculo.getIdArtista());
+        
+        informacionFuncion.setFuncion(funcion);
+        informacionFuncion.setEspectaculo(espectaculo);
+        informacionFuncion.setArtista(artista);
+        
+        return informacionFuncion;
     }
 }

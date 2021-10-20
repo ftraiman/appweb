@@ -77,13 +77,12 @@ public class ServletPaquete extends HttpServlet {
 
             try {
                 PaqueteDTO paquete = new PaqueteDTO(idArtista, nombre, descripcion, fechaInicio, fechaFin, descuento, imagen);
-                servicioPaquetes.altaPaquete(paquete);
-
+                servicioPaquetes.altaPaquete(paquete, usuarioLogueado.getId());
                 req.getRequestDispatcher("paquete/mispaquetes.jsp").forward(req, resp);
                 return;
             } catch (Exception e) {
                 req.setAttribute("error", e.getMessage());
-                req.getRequestDispatcher("espectaculo/alta.jsp").forward(req, resp);
+                req.getRequestDispatcher("paquete/alta.jsp").forward(req, resp);
                 return;
             }
         } else if ("espectaculoapaquete".equalsIgnoreCase(operacion)) {
@@ -104,7 +103,29 @@ public class ServletPaquete extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        
+        HttpSession session = req.getSession();
+        UsuarioDTO usuarioLogueado = (UsuarioDTO) session.getAttribute(Constantes.USUARIO);
+        
+        String operacion = req.getParameter("operacion");
+
+        if ("adquirirpaquete".equalsIgnoreCase(operacion)) {
+            if (req.getParameter("idPaquete") == null || usuarioLogueado == null) {
+                req.getRequestDispatcher("paquete/index.jsp").forward(req, resp);
+            } else {
+                Long idUsuario = usuarioLogueado.getId();
+                Long idPaquete = Long.valueOf(req.getParameter("idPaquete"));
+                try {
+                    servicioPaquetes.altaUsuarioEnPaquete(idUsuario, idPaquete);
+                    req.setAttribute(Constantes.MENSAJE, "El Paquete se agrego correctamente");
+                    req.getRequestDispatcher("paquete/index.jsp").forward(req, resp);
+                } catch (Exception e) {
+                    req.setAttribute(Constantes.ERROR, e.getMessage());
+                    req.getRequestDispatcher("paquete/index.jsp").forward(req, resp);
+                    return;
+                }
+            }
+        }
     }
 
     public static InformacionEspectaculoDTO getEspectaculoPorId(Long idEspectaculo) {
@@ -133,8 +154,12 @@ public class ServletPaquete extends HttpServlet {
         return informacionEspectaculo;
     }
 
-    public static List<PaqueteDTO> getPaquetesPorIdUsuario(Long idUsuario) {
-        return servicioPaquetes.getPaquetesPorIdArtista(idUsuario);
+    public static List<PaqueteDTO> getPaquetesPorIdUsuario(Long idArtista) {
+        return servicioPaquetes.getPaquetesPorIdArtista(idArtista);
+    }
+    
+    public static List<PaqueteDTO> getPaquetesCompradosPorIdUsuario(Long idUsuario) {
+        return servicioPaquetes.getPaquetesCompradosPorIdUsuario(idUsuario);
     }
 
     public static InformacionPaqueteDTO getPaquetePorId(Long idPaquete) {

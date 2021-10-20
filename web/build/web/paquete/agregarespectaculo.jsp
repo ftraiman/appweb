@@ -1,3 +1,4 @@
+<%@page import="edu.innova.webapp.dtos.InformacionPaqueteDTO"%>
 <%@page import="edu.innova.webapp.dtos.EspectaculoDTO"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="edu.innova.webapp.helpers.HelperFechas"%>
@@ -22,7 +23,8 @@
 
     Long id = Long.valueOf(request.getParameter("idPaquete"));
 
-    PaqueteDTO p = ServletPaquete.getPaquetePorId(id);
+    InformacionPaqueteDTO informacionPaquete = ServletPaquete.getPaquetePorId(id);
+    PaqueteDTO p = informacionPaquete.getPaquete();
     List<EspectaculoDTO> espectaculos = p.getEspectaculos();
     List<EspectaculoDTO> espectaculosNoIncluidosEnPaquete = ServletPaquete.getEspectaculosNoIncluidosEnPaquetePorId(usuarioSession.getId(), id);
 

@@ -3,6 +3,7 @@ package edu.innova.webapp.helpers;
 public class Constantes {
     
     public static final String ERROR = "error";
+    public static final String MENSAJE = "mensaje";
     public static final String USUARIO = "usuario";
     public static final String ESPECTADOR = "espectador";
     public static final String ARTISTA = "artista";

@@ -64,6 +64,23 @@
                     <%  }%>
                     <div class="container-fluid py-4">
                         <div class="row">
+                            <div class="col-xl-2 col-sm-6 mb-xl-0 mb-4">
+                                <div class="card">
+                                    <div class="card-body p-3">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="form-group">
+                                                    <a href="/web/paquete/alta.jsp" class="btn btn-youtube">Crear nuevo Paquete</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-fluid py-4">
+                        <div class="row">
                             <div class="col-12">
                                 <div class="card mb-4">
                                     <div class="card-header pb-0">

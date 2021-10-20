@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ServicioPaquetes {
     
-    void altaPaquete(PaqueteDTO paquete);
+    void altaPaquete(PaqueteDTO paquete, Long idArtista);
     
     List<PaqueteDTO> getPaquetesPorIdArtista(Long idArtista);
     
@@ -19,4 +19,8 @@ public interface ServicioPaquetes {
     List<PaqueteDTO> getPaquetesPorIdEspectaculo(Long idEspectaculo);
     
     List<PaqueteDTO> getTodosLosPaquetes();
+    
+    void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
+    
+    List<PaqueteDTO> getPaquetesCompradosPorIdUsuario(Long idUsuario);
 }
