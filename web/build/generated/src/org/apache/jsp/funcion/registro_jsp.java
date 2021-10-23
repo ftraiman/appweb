@@ -1,18 +1,24 @@
-package org.apache.jsp.paquete;
+package org.apache.jsp.funcion;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import edu.innova.webapp.helpers.Constantes;
 import java.math.BigDecimal;
-import edu.innova.webapp.helpers.HelperFechas;
-import edu.innova.webapp.servlets.ServletPaquete;
 import edu.innova.webapp.dtos.PaqueteDTO;
+import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
+import edu.innova.webapp.dtos.FuncionDTO;
 import java.util.List;
+import java.util.List;
+import edu.innova.webapp.dtos.InformacionCanjeTresPorUno;
+import edu.innova.webapp.dtos.EspectaculoDTO;
+import edu.innova.webapp.servlets.ServletRegistroEnFuncion;
+import edu.innova.webapp.servlets.ServletFuncion;
+import edu.innova.webapp.dtos.InformacionFuncionDTO;
+import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.servlets.ServletLogin;
 
-public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class registro_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -21,9 +27,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   static {
     _jspx_dependants = new java.util.ArrayList<String>(3);
-    _jspx_dependants.add("/paquete/../common/lateral.jsp");
-    _jspx_dependants.add("/paquete/../common/header.jsp");
-    _jspx_dependants.add("/paquete/../common/footer.jsp");
+    _jspx_dependants.add("/funcion/../common/lateral.jsp");
+    _jspx_dependants.add("/funcion/../common/header.jsp");
+    _jspx_dependants.add("/funcion/../common/footer.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -63,17 +69,40 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
 
-    String carpeta = "Paquete";
-    String pagina = "Inicio";
+    String carpeta = "Función";
+    String pagina = "Registro";
 
-    List<PaqueteDTO> paquetes = ServletPaquete.getTodosLosPaquetes();
-    
-    UsuarioDTO u = (UsuarioDTO) request.getSession().getAttribute("usuario");
-    boolean ofrecerPaquete = false;
-    if (u != null) {
-        ofrecerPaquete = true;
+    UsuarioDTO usuarioLogueado = (UsuarioDTO) session.getAttribute(Constantes.USUARIO);
+
+    if (request.getParameter("idFuncion") == null || usuarioLogueado == null) {
+        response.sendRedirect("/web/principal/index.jsp");
+        return;
     }
+    Long idFuncion = Long.valueOf(request.getParameter("idFuncion"));
+    Long idUsuario = usuarioLogueado.getId();
+    InformacionFuncionDTO infoFuncion = ServletFuncion.getInformacionFuncion(idFuncion, request);
+    if (ServletRegistroEnFuncion.isDatosInvalidos(infoFuncion)) {
+        response.sendRedirect("/web/principal/index.jsp");
+        return;
+    }
+    EspectaculoDTO espectaculo = infoFuncion.getEspectaculo();
+    Long idEspectaculo = espectaculo.getId();
+
+    InformacionCanjeTresPorUno ictpu = ServletFuncion.getInfoCanjeTresPorUno(idUsuario);
+    List<FuncionDTO> funcionesParaCanjear = ictpu.getFuncionesCanjeables();
+
+    InformacionCanjePaqueteDTO icpdto = ServletFuncion.getInfoCanjePaquete(idUsuario, idFuncion);
+    List<PaqueteDTO> paquetes = icpdto.getPaquetesCanjeables();
+    BigDecimal costoEspectaculo = espectaculo.getCosto();
+
+
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -284,22 +313,6 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        </li>\n");
       out.write("      </ul>\n");
       out.write("    </div>\n");
-      out.write("    <div class=\"sidenav-footer mx-3 \">\n");
-      out.write("      <div class=\"card card-background shadow-none card-background-mask-secondary\" id=\"sidenavCard\">\n");
-      out.write("        <div class=\"full-background\" style=\"background-image: url('../assets/img/curved-images/white-curved.jpeg')\"></div>\n");
-      out.write("        <div class=\"card-body text-start p-3 w-100\">\n");
-      out.write("          <div class=\"icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md\">\n");
-      out.write("            <i class=\"ni ni-diamond text-dark text-gradient text-lg top-0\" aria-hidden=\"true\" id=\"sidenavCardIcon\"></i>\n");
-      out.write("          </div>\n");
-      out.write("          <div class=\"docs-info\">\n");
-      out.write("            <h6 class=\"text-white up mb-0\">Need help?</h6>\n");
-      out.write("            <p class=\"text-xs font-weight-bold\">Please check our docs</p>\n");
-      out.write("            <a href=\"https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard\" target=\"_blank\" class=\"btn btn-white btn-sm w-100 mb-0\">Documentation</a>\n");
-      out.write("          </div>\n");
-      out.write("        </div>\n");
-      out.write("      </div>\n");
-      out.write("      <a class=\"btn bg-gradient-primary mt-4 w-100\" href=\"https://www.creative-tim.com/product/soft-ui-dashboard-pro?ref=sidebarfree\" type=\"button\">Upgrade to pro</a>\n");
-      out.write("    </div>\n");
       out.write("  </aside>");
       out.write("\n");
       out.write("        <main class=\"main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg \">\n");
@@ -383,129 +396,127 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</nav>");
       out.write("\n");
       out.write("            <!-- End Navbar -->\n");
-      out.write("            <div class=\"container-fluid py-4\">\n");
-      out.write("                <div class=\"col-sm-2\">\n");
-      out.write("                </div>\n");
-      out.write("                <div class=\"col-sm-12\">\n");
-      out.write("                    ");
+      out.write("            ");
   if (request.getAttribute(Constantes.ERROR) != null) {
       out.write("\n");
-      out.write("                    <div class=\"alert alert-warning\" role=\"alert\">\n");
-      out.write("                        ");
+      out.write("            <br />\n");
+      out.write("            <div class=\"alert alert-warning\" role=\"alert\">\n");
+      out.write("                ");
       out.print( request.getAttribute(Constantes.ERROR));
       out.write("\n");
-      out.write("                    </div>\n");
-      out.write("                    ");
-  } 
-      out.write("\n");
-      out.write("                    ");
-  if (request.getAttribute(Constantes.MENSAJE) != null) {
-      out.write("\n");
-      out.write("                    <div class=\"alert alert-success\" role=\"alert\">\n");
-      out.write("                        ");
-      out.print( request.getAttribute(Constantes.MENSAJE));
-      out.write("\n");
-      out.write("                    </div>\n");
-      out.write("                    ");
-  } 
-      out.write("\n");
-      out.write("                    <div class=\"container-fluid py-4\">\n");
-      out.write("                        <div class=\"row\">\n");
-      out.write("                            <div class=\"col-12\">\n");
-      out.write("                                <div class=\"card mb-4\">\n");
-      out.write("                                    <div class=\"card-header pb-0\">\n");
-      out.write("                                        <h6>Todos los Paquetes</h6>\n");
-      out.write("                                    </div>\n");
-      out.write("                                    <div class=\"card-body px-0 pt-0 pb-2\">\n");
-      out.write("                                        <div class=\"table-responsive p-0\">\n");
-      out.write("                                            <table class=\"table align-items-center mb-0\">\n");
-      out.write("                                                <thead>\n");
-      out.write("                                                    <tr>\n");
-      out.write("                                                        <th class=\"text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Nombre</th>\n");
-      out.write("                                                        <th class=\"text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2\">Fecha de inicio</th>\n");
-      out.write("                                                        <th class=\"text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Fecha de Fin</th>\n");
-      out.write("                                                        <th class=\"text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Descuento</th>\n");
-      out.write("                                                        <th class=\"text-secondary opacity-7\"></th>\n");
-      out.write("                                                    </tr>\n");
-      out.write("                                                </thead>\n");
-      out.write("                                                <tbody>\n");
-      out.write("                                                    ");
- if (paquetes.size() > 0) {
-                                                            for (PaqueteDTO paquete : paquetes) {
-                                                                String nombre = paquete.getNombre();
-                                                                String descripcion = paquete.getDescripcion();
-                                                                String fechaInicio = HelperFechas.dateToString(paquete.getFechaInicio(), "dd/MM/yyyy");
-                                                                String fechaFin = HelperFechas.dateToString(paquete.getFechaInicio(), "dd/MM/yyyy");
-                                                                String imagen = paquete.getImagen();
-                                                                BigDecimal descuento = paquete.getDescuento();
-                                                                Long idPaquete = paquete.getId();
-                                                    
-      out.write("\n");
-      out.write("                                                    <tr>\n");
-      out.write("                                                        <td>\n");
-      out.write("                                                            <div class=\"d-flex px-2 py-1\">\n");
-      out.write("                                                                <div>\n");
-      out.write("                                                                    <img src=\"/web/imagenes?carpeta=paquetes&archivo=");
-      out.print(imagen);
-      out.write("\" class=\"avatar avatar-sm me-3\" alt=\"");
-      out.print(nombre);
-      out.write("\">\n");
-      out.write("                                                                </div>\n");
-      out.write("                                                                <div class=\"d-flex flex-column justify-content-center\">\n");
-      out.write("                                                                    <h6 class=\"mb-0 text-sm\">");
-      out.print(nombre);
-      out.write("</h6>\n");
-      out.write("                                                                    <p class=\"text-xs font-weight-bold mb-0\">");
-      out.print(descripcion);
-      out.write("</p>\n");
-      out.write("                                                                </div>\n");
-      out.write("                                                            </div>\n");
-      out.write("                                                        </td>\n");
-      out.write("                                                        <td>\n");
-      out.write("                                                            <p class=\"text-xs font-weight-bold mb-0\">");
-      out.print(fechaInicio);
-      out.write("</p>\n");
-      out.write("                                                        </td>\n");
-      out.write("                                                        <td class=\"align-middle text-center text-sm\">\n");
-      out.write("                                                            <p class=\"text-xs font-weight-bold mb-0\">");
-      out.print(fechaFin);
-      out.write("</p>\n");
-      out.write("                                                        </td>\n");
-      out.write("                                                        <td class=\"align-middle text-center\">\n");
-      out.write("                                                            <span class=\"text-secondary text-xs font-weight-bold\">");
-      out.print(descuento);
-      out.write(" %</span>\n");
-      out.write("                                                        </td>\n");
-      out.write("                                                        <td class=\"align-middle\">\n");
-      out.write("                                                            <a class=\"btn btn-link pe-3 ps-0 mb-0 ms-auto\" href=\"/web/paquete/detalle.jsp?idPaquete=");
-      out.print(idPaquete);
-      out.write("\">Ver detalle</a> \n");
-      out.write("                                                            ");
-if (ofrecerPaquete) { 
-      out.write("\n");
-      out.write("                                                                    / <a class=\"btn btn-link pe-3 ps-0 mb-0 ms-auto\" href=\"/web/paquete?operacion=adquirirpaquete&idPaquete=");
-      out.print(idPaquete);
-      out.write("\">Adquirir</a> \n");
-      out.write("                                                            \n");
-      out.write("                                                            ");
- } 
-      out.write("\n");
-      out.write("                                                        </td>\n");
-      out.write("                                                    </tr>\n");
-      out.write("                                                    ");
+      out.write("            </div>\n");
+      out.write("            ");
   }
-                                                        }
       out.write("\n");
-      out.write("                                                </tbody>\n");
-      out.write("                                            </table>\n");
-      out.write("                                        </div>\n");
-      out.write("                                    </div>\n");
+      out.write("            <div class=\"container-fluid py-4\">\n");
+      out.write("                <!-- Compra directa-->\n");
+      out.write("                <div class=\"col-12 mt-4\">\n");
+      out.write("                    <div class=\"card mb-4\">\n");
+      out.write("                        <div class=\"card-header pb-0 p-3\">\n");
+      out.write("                            <h3 class=\"mb-1\">Compra directa</h3>\n");
+      out.write("                            <br />\n");
+      out.write("                            <p class=\"text-sm\">Costo: <b>");
+      out.print(espectaculo.getCosto());
+      out.write(" $</b></p>\n");
+      out.write("                            <form role=\"form\" method=\"POST\" action=\"/web/registrofuncion\" enctype=\"multipart/form-data\">\n");
+      out.write("                                <input type=\"hidden\" name=\"operacion\" value=\"compradirecta\"/>\n");
+      out.write("                                <input type=\"hidden\" name=\"idFuncion\" value=\"");
+      out.print(idFuncion);
+      out.write("\"/>\n");
+      out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                                    <button type=\"submit\" class=\"btn btn-linkedin\">Adquirir función</button>\n");
       out.write("                                </div>\n");
-      out.write("                            </div>\n");
-      out.write("                        </div>\n");
+      out.write("                            </form>\n");
+      out.write("                        </div> \n");
       out.write("                    </div>\n");
       out.write("                </div>\n");
-      out.write("                <div class=\"col-sm-2\">\n");
+      out.write("            </div>\n");
+      out.write("            <!-- Canje 3x1 -->\n");
+      out.write("            <div class=\"container-fluid py-4\">\n");
+      out.write("                <div class=\"col-12 mt-4\">\n");
+      out.write("                    <div class=\"card mb-4\">\n");
+      out.write("                        <div class=\"card-header pb-0 p-3\">\n");
+      out.write("                            <h3 class=\"mb-1\">Canje 3 x 1</h3>\n");
+      out.write("                            <br />\n");
+      out.write("                            <p class=\"text-sm\">Costo: <b>0 $</b></p>\n");
+      out.write("                            <form role=\"form\" method=\"POST\" action=\"/web/registrofuncion\" enctype=\"multipart/form-data\">\n");
+      out.write("                                <input type=\"hidden\" name=\"operacion\" value=\"canjetresporuno\"/>\n");
+      out.write("                                <input type=\"hidden\" name=\"idFuncion\" value=\"");
+      out.print(idFuncion);
+      out.write("\"/>\n");
+      out.write("                                <input type=\"hidden\" name=\"idEspectaculo\" value=\"");
+      out.print(idEspectaculo);
+      out.write("\"/>\n");
+      out.write("                                <p><b>Por favor selecciona 3 funciones</b></p>\n");
+      out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                                    <select name=\"tresporuno\" class=\"form-select\" size=\"3\" aria-label=\"Selecciona 3 funciones para cambiar\" multiple=\"true\">\n");
+      out.write("                                        ");
+
+                                            for (FuncionDTO funcion : funcionesParaCanjear) {
+                                        
+      out.write("\n");
+      out.write("                                        <option value=\"");
+      out.print(funcion.getId());
+      out.write('"');
+      out.write('>');
+      out.print(funcion.getNombre());
+      out.write("</option>\n");
+      out.write("                                        ");
+ }
+      out.write("\n");
+      out.write("                                    </select>\n");
+      out.write("                                </div>\n");
+      out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                                    <button type=\"submit\" class=\"btn btn-linkedin\">Canjear 3 funciones por una</button>\n");
+      out.write("                                </div>\n");
+      out.write("                            </form>\n");
+      out.write("                        </div> \n");
+      out.write("                    </div>\n");
+      out.write("                </div>\n");
+      out.write("            </div>\n");
+      out.write("            <!-- Canje Paquete -->\n");
+      out.write("            <div class=\"container-fluid py-4\">\n");
+      out.write("                <div class=\"col-12 mt-4\">\n");
+      out.write("                    <div class=\"card mb-4\">\n");
+      out.write("                        <div class=\"card-header pb-0 p-3\">\n");
+      out.write("                            <h3 class=\"mb-1\">Canje Paquete</h3>\n");
+      out.write("                            <br />\n");
+      out.write("                            <p class=\"text-sm\">Costo: <b>Depende del Paquete</b></p>\n");
+      out.write("                            <form role=\"form\" method=\"POST\" action=\"/web/registrofuncion\" enctype=\"multipart/form-data\">\n");
+      out.write("                                <input type=\"hidden\" name=\"operacion\" value=\"canjepaquete\"/>\n");
+      out.write("                                <input type=\"hidden\" name=\"idFuncion\" value=\"");
+      out.print(idFuncion);
+      out.write("\"/>\n");
+      out.write("                                <input type=\"hidden\" name=\"idEspectaculo\" value=\"");
+      out.print(idEspectaculo);
+      out.write("\"/>\n");
+      out.write("                                <p><b>Por favor selecciona 1 Paquete</b></p>\n");
+      out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                                    <select name=\"idPaquete\" class=\"form-select\" size=\"3\" aria-label=\"Selecciona 1 Paquete\">\n");
+      out.write("                                        ");
+
+                                            for (PaqueteDTO paquete : paquetes) {
+                                        
+      out.write("\n");
+      out.write("                                        <option value=\"");
+      out.print(paquete.getId());
+      out.write('"');
+      out.write('>');
+      out.print(paquete.getNombre());
+      out.write(" (Descuento ");
+      out.print(paquete.getDescuento());
+      out.write(")</option>\n");
+      out.write("                                        ");
+ }
+      out.write("\n");
+      out.write("                                    </select>\n");
+      out.write("                                </div>\n");
+      out.write("                                <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                                    <button type=\"submit\" class=\"btn btn-linkedin\">Adquirir Función usando Paquete</button>\n");
+      out.write("                                </div>\n");
+      out.write("                            </form>\n");
+      out.write("                        </div> \n");
+      out.write("                    </div>\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("            ");

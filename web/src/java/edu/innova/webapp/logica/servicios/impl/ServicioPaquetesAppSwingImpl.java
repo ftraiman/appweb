@@ -1,16 +1,22 @@
 package edu.innova.webapp.logica.servicios.impl;
 
+import edu.innova.logica.controladores.CanjeControlador;
 import edu.innova.logica.controladores.EspectaculoControlador;
 import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.controladores.PaqueteControlador;
+import edu.innova.logica.controladores.impl.CanjeControladorImpl;
 import edu.innova.logica.controladores.impl.EspectaculosControladorImpl;
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
 import edu.innova.logica.controladores.impl.PaqueteControladorImpl;
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
+import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
 import edu.innova.webapp.dtos.PaqueteDTO;
+import edu.innova.webapp.logica.servicios.ServicioEspectaculos;
 import edu.innova.webapp.logica.servicios.ServicioPaquetes;
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +26,8 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
     private static final EspectaculoControlador espectaculoControlador = new EspectaculosControladorImpl().getInstance();
     private static final FuncionControlador funcionControlador = new FuncionControladorImpl().getInstance();
     private static final PaqueteControlador paqueteControlador = new PaqueteControladorImpl().getInstance();
+    private static final CanjeControlador canjeControlador = CanjeControladorImpl.getInstance();
+    private static final ServicioEspectaculos servicioEspectaculos = ServicioEspectaculosAppSwingImpl.getInstance();
 
     private ServicioPaquetesAppSwingImpl() {
     }
@@ -121,5 +129,25 @@ public class ServicioPaquetesAppSwingImpl implements ServicioPaquetes {
         paqueteDto.setNombre(paquete.getNombre());
         paqueteDto.setImagen(paquete.getImagen());
         return paqueteDto;
+    }
+
+    @Override
+    public InformacionCanjePaqueteDTO getInfoCanjePaquete(Long idUsuario, Long idFuncion) {
+        InformacionCanjePaqueteDTO icpdto = new InformacionCanjePaqueteDTO();
+        List<edu.innova.logica.dtos.PaqueteDTO> paquetes = paqueteControlador.getPaquetesConLaFuncion(idUsuario, idFuncion);
+        icpdto.setIsCanjeDisponible(paquetes.size() > 0);
+        icpdto.setPaquetesCanjeables(
+                paquetes
+                .stream()
+                .map(this::paqueteDTOMapper)
+                .collect(Collectors.toList()));
+        return icpdto;
+    }
+
+    @Override
+    public void canjePaquete(Long idUsuario, Long idFuncion, PaqueteDTO paquete, EspectaculoDTO espectaculo) {
+        BigDecimal costo = espectaculo.getCosto().multiply(BigDecimal.valueOf(100).subtract(paquete.getDescuento())).divide(BigDecimal.valueOf(100));
+        servicioEspectaculos.registrarUsuarioEnFuncion(idFuncion, idUsuario, new Date(), costo);
+        canjeControlador.altaEspectaculoPaqueteUtilizado(idUsuario, paquete.getId(), espectaculo.getId());
     }
 }

@@ -58,6 +58,16 @@
             <!-- Navbar -->
             <%@include file="../common/header.jsp" %>
             <!-- End Navbar -->
+            <%  if (request.getAttribute(Constantes.ERROR) != null) {%>
+                    <div class="alert alert-warning" role="alert">
+                        <%= request.getAttribute(Constantes.ERROR)%>
+                    </div>
+                    <%  } %>
+                    <%  if (request.getAttribute(Constantes.MENSAJE) != null) {%>
+                    <div class="alert alert-success" role="alert">
+                        <%= request.getAttribute(Constantes.MENSAJE)%>
+                    </div>
+                    <%  } %>
             <div class="container-fluid py-4">
                 <div class="row mt-4">
                     <div class="col-lg-7 mb-lg-0 mb-4">

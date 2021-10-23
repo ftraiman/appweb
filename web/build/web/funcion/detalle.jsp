@@ -16,12 +16,14 @@
     }
     Long idFuncion = Long.valueOf(request.getParameter("idFuncion"));
 
-    InformacionFuncionDTO infoFuncion = ServletFuncion.getInformacionFuncion(idFuncion);
+    InformacionFuncionDTO infoFuncion = ServletFuncion.getInformacionFuncion(idFuncion, request);
     FuncionDTO funcion = infoFuncion.getFuncion();
     EspectaculoDTO espectaculo = infoFuncion.getEspectaculo();
     UsuarioDTO artista = infoFuncion.getArtista();
     List<UsuarioDTO> artistasInvitados = funcion.getArtistasInvitados();
-
+    Boolean isUsuarioLogueado = infoFuncion.getIsUsuarioLogueado();
+    Boolean isUsuarioRegistradoEnFuncion = infoFuncion.getIsUsuarioRegistradoEnFuncion();
+    Boolean isFuncionCompleta = infoFuncion.getIsFuncionCompleta();
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +61,7 @@
                 <div class="col-12 mt-4">
                     <div class="card mb-4">
                         <div class="card-header pb-0 p-3">
-                            <h6 class="mb-1">Espectáculo : <%=funcion.getNombre()%></h6>
+                            <h6 class="mb-1">Función: <%=funcion.getNombre()%></h6>
                             <br />
                             <p class="text-sm">Fecha: <b><%=HelperFechas.dateToString(funcion.getFechaInicio(), "yyyy-MM-dd HH:mm")%></b></p>
                             <div>Artista: 
@@ -67,6 +69,28 @@
                                 <b><%=artista.getNombre()%> <%=artista.getApellido()%> <u>(<%=artista.getNickname()%>)</u></b>
                             </div>
                         </div>
+                        <% if (isUsuarioLogueado) {%>
+                        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-1">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+                                    <li class="nav-item">
+                                        <%if (isFuncionCompleta) { %>
+                                        <div class="alert alert-light" role="alert">
+                                            La Función se encuentra completa!
+                                        </div>        
+                                        <% } %>
+                                        <%if (isUsuarioRegistradoEnFuncion) { %>
+                                        <div class="alert alert-light" role="alert">
+                                            Ya te encuentras registrado en la Función!
+                                        </div>        
+                                        <% } else if (!isFuncionCompleta) {%>
+                                        <a class="nav-link mb-0 px-0 py-1 active " href="/web/funcion/registro.jsp?idFuncion=<%=funcion.getId()%>" >Regístrate en la Función</a>
+                                        <% } %>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <% } %>
                         <div class="card-body p-3">
                             <h4>Artistas invitados</h4>
                             <table class="table align-items-center mb-0">
@@ -115,7 +139,7 @@
                                         </td>
                                     </tr>
                                     <%  }
-                                              }%>
+                                        }%>
                                 </tbody>
                             </table>
                         </div>

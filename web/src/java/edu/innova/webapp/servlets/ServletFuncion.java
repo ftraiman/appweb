@@ -2,14 +2,18 @@ package edu.innova.webapp.servlets;
 
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
+import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
+import edu.innova.webapp.dtos.InformacionCanjeTresPorUno;
 import edu.innova.webapp.dtos.InformacionFuncionDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.helpers.HelperFechas;
 import edu.innova.webapp.helpers.HelperImagenes;
 import edu.innova.webapp.logica.servicios.ServicioEspectaculos;
+import edu.innova.webapp.logica.servicios.ServicioPaquetes;
 import edu.innova.webapp.logica.servicios.ServicioUsuarios;
 import edu.innova.webapp.logica.servicios.impl.ServicioEspectaculosAppSwingImpl;
+import edu.innova.webapp.logica.servicios.impl.ServicioPaquetesAppSwingImpl;
 import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -32,6 +36,7 @@ public class ServletFuncion extends HttpServlet {
     private final static HelperImagenes helperImagenes = HelperImagenes.getInstance();
     private final static ServicioUsuarios servicioUsuarios = ServicioUsuariosAppSwingImpl.getInstance();
     private final static ServicioEspectaculos servicioEspectaculos = ServicioEspectaculosAppSwingImpl.getInstance();
+    private final static ServicioPaquetes servicioPaquetes = ServicioPaquetesAppSwingImpl.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -85,16 +90,38 @@ public class ServletFuncion extends HttpServlet {
         return artistas;
     }
     
-    public static InformacionFuncionDTO getInformacionFuncion(Long idFuncion) {
+    public static InformacionFuncionDTO getInformacionFuncion(Long idFuncion, HttpServletRequest req) {
+        
+        HttpSession session = req.getSession();
+        UsuarioDTO usuarioLogueado = (UsuarioDTO) session.getAttribute(Constantes.USUARIO);
+       
         InformacionFuncionDTO informacionFuncion = new InformacionFuncionDTO();
         FuncionDTO funcion = servicioEspectaculos.getFuncionPorId(idFuncion);
         EspectaculoDTO espectaculo = servicioEspectaculos.getEspectaculoPorId(funcion.getIdEspectaculo());
         UsuarioDTO artista = servicioUsuarios.getUsuarioPorId(espectaculo.getIdArtista());
+        Boolean isFuncionCompleta = servicioEspectaculos.isFuncionCompleta(idFuncion);
+        Boolean isUsuarioLogueado = usuarioLogueado != null;
+        Boolean usuarioRegistradoEnFuncion = false;
+        
+        if (isUsuarioLogueado && !isFuncionCompleta) {
+             usuarioRegistradoEnFuncion = servicioEspectaculos.isUsuarioRegistradoEnFuncion(idFuncion, usuarioLogueado.getId());
+        }
         
         informacionFuncion.setFuncion(funcion);
         informacionFuncion.setEspectaculo(espectaculo);
         informacionFuncion.setArtista(artista);
+        informacionFuncion.setIsUsuarioLogueado(usuarioLogueado != null);
+        informacionFuncion.setIsUsuarioRegistradoEnFuncion(usuarioRegistradoEnFuncion);
+        informacionFuncion.setIsFuncionCompleta(isFuncionCompleta);
         
         return informacionFuncion;
+    }
+    
+    public static InformacionCanjeTresPorUno getInfoCanjeTresPorUno(Long idUsuario) {
+        return servicioEspectaculos.getInfoCanjeTresPorUno(idUsuario);
+    }
+    
+    public static InformacionCanjePaqueteDTO getInfoCanjePaquete(Long idUsuario, Long idFuncion) {
+        return servicioPaquetes.getInfoCanjePaquete(idUsuario, idFuncion);
     }
 }

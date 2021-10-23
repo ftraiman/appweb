@@ -1,6 +1,7 @@
 package edu.innova.webapp.logica.servicios;
 
 import edu.innova.webapp.dtos.EspectaculoDTO;
+import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
 import edu.innova.webapp.dtos.PaqueteDTO;
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface ServicioPaquetes {
     void altaUsuarioEnPaquete(Long idUsuario, Long idPaquete);
     
     List<PaqueteDTO> getPaquetesCompradosPorIdUsuario(Long idUsuario);
+    
+    InformacionCanjePaqueteDTO getInfoCanjePaquete(Long idUsuario, Long idFuncion);
+
+    void canjePaquete(Long idUsuario, Long idFuncion, PaqueteDTO paquete, EspectaculoDTO espectaculo);
 }

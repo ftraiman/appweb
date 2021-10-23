@@ -2,6 +2,7 @@ package edu.innova.webapp.servlets;
 
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.exceptions.InnovaModelException;
+import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.helpers.HelperFechas;
 import edu.innova.webapp.helpers.HelperImagenes;
 import edu.innova.webapp.helpers.HelperImagenes.CarpetaDestinoImagenes;
@@ -55,7 +56,7 @@ public class ServletAltaUsuario extends HttpServlet {
             return;
             
         } catch (InnovaModelException e) {
-            req.setAttribute("error", e.getMessage());
+            req.setAttribute(Constantes.ERROR, e.getMessage());
             req.getRequestDispatcher("principal/signin.jsp").forward(req, resp);
             return;
         }

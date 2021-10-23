@@ -5,11 +5,16 @@ import edu.innova.logica.controladores.FuncionControlador;
 import edu.innova.logica.controladores.impl.EspectaculosControladorImpl;
 import edu.innova.logica.controladores.impl.FuncionControladorImpl;
 import edu.innova.logica.dtos.UsuarioDTO;
+import edu.innova.webapp.dtos.CanjeTresPorUnoDTO;
 import edu.innova.webapp.dtos.CategoriaDTO;
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
+import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
+import edu.innova.webapp.dtos.InformacionCanjeTresPorUno;
 import edu.innova.webapp.dtos.PlataformaDTO;
 import edu.innova.webapp.logica.servicios.ServicioEspectaculos;
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -53,7 +58,7 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
     public void altaFuncion(FuncionDTO funcion) {
         funcionControlador.altaFuncionDTO(funcionMapper(funcion));
     }
-    
+
     @Override
     public FuncionDTO getFuncionPorId(Long idFuncion) {
         return funcionMapper(funcionControlador.getFuncionDTOPorId(idFuncion));
@@ -69,6 +74,16 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
         espectaculos.forEach(espectaculo -> completarParametros(espectaculo, categorias, plataformas));
 
         return espectaculos;
+    }
+
+    @Override
+    public Boolean isUsuarioRegistradoEnFuncion(Long idFuncion, Long idUsuario) {
+        return funcionControlador.getUsuarioRegistradoEnFuncion(idFuncion, idUsuario);
+    }
+
+    @Override
+    public void registrarUsuarioEnFuncion(Long idFuncion, Long idUsuario, Date fechaRegistro, BigDecimal costo) {
+        funcionControlador.altaEspectadorAFuncionDto(idFuncion, idUsuario, fechaRegistro, costo);
     }
 
     private edu.innova.logica.dtos.EspectaculoDTO espectaculoMapper(EspectaculoDTO e) {
@@ -112,6 +127,34 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
     private void completarParametros(EspectaculoDTO espectaculo, List<CategoriaDTO> categorias, List<PlataformaDTO> plataformas) {
         espectaculo.setPlataforma(plataformas.stream().filter(plataforma -> Objects.equals(plataforma.getId(), espectaculo.getIdPlataforma())).findFirst().get());
         espectaculo.setCategoria(categorias.stream().filter(categoria -> Objects.equals(categoria.getId(), espectaculo.getIdCategoria())).findFirst().get());
+    }
+
+    @Override
+    public Boolean isFuncionCompleta(Long idFuncion) {
+        return funcionControlador.isFuncionCompleta(idFuncion);
+    }
+
+    @Override
+    public InformacionCanjeTresPorUno getInfoCanjeTresPorUno(Long idUsuario) {
+        InformacionCanjeTresPorUno ictpu = new InformacionCanjeTresPorUno();
+        List<FuncionDTO> funcionesParaCanjear
+                = funcionControlador.getFuncionesDeUsuarioParaCanjear(idUsuario)
+                        .stream()
+                        .map(ServicioEspectaculosAppSwingImpl::funcionMapper)
+                        .collect(Collectors.toList());
+        ictpu.setIsCanjeDisponible((funcionesParaCanjear.size() >= 3));
+        ictpu.setFuncionesCanjeables(funcionesParaCanjear);
+        return ictpu;
+    }
+
+    @Override
+    public void canjeTresPorUno(CanjeTresPorUnoDTO ctpudto) {
+        funcionControlador.canjearFunciones(canjeTresPorUnoMapper(ctpudto));
+    }
+
+    private edu.innova.logica.dtos.CanjeTresPorUnoDTO canjeTresPorUnoMapper(CanjeTresPorUnoDTO ctpudto) {
+        return new edu.innova.logica.dtos.CanjeTresPorUnoDTO(ctpudto.getId(), ctpudto.getIdUsuario(), ctpudto.getIdFuncionObtenida(),
+                ctpudto.getFuncionesCanjeadas(), ctpudto.getFechaRegistro(), ctpudto.getIdEspectaculoDeFuncion());
     }
 
 }
