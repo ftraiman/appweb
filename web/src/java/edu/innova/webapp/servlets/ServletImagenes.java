@@ -41,8 +41,14 @@ public class ServletImagenes extends HttpServlet {
         }
 
         String archivo = request.getParameter("archivo");
-
-        FileInputStream fin = new FileInputStream(helperProperties.getRUTA_PROYECTO() + File.separator + carpeta + File.separator + archivo);
+        
+        FileInputStream fin = null;
+        try {
+            fin = new FileInputStream(helperProperties.getRUTA_PROYECTO() + File.separator + carpeta + File.separator + archivo);
+        } catch (Exception e) {
+            fin = new FileInputStream(helperProperties.getRUTA_PROYECTO() + File.separator + "imagenes" + File.separator + "notfound.jpg");
+        }
+        
 
         ServletOutputStream out;
         out = response.getOutputStream();

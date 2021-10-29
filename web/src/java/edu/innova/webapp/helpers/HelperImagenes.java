@@ -24,7 +24,7 @@ public class HelperImagenes {
     }
 
     public enum CarpetaDestinoImagenes {
-        USUARIOS, ESPECTACULOS, PAQUETES
+        USUARIOS, ESPECTACULOS, PAQUETES, FUNCIONES
     };
 
     public boolean guardarImagen(Part filePart, CarpetaDestinoImagenes destino, String nombreImagen) {
@@ -68,6 +68,8 @@ public class HelperImagenes {
                 return helperProperties.getRUTA_ESPECTACULOS();
             case PAQUETES:
                 return helperProperties.getRUTA_PAQUETES();
+            case FUNCIONES:
+                return helperProperties.getRUTA_FUNCIONES();
             default:
                 return null;
         }

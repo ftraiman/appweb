@@ -92,7 +92,7 @@
                     <%  if (request.getAttribute(Constantes.ERROR) != null) {%>
                     <br />
                     <div class="alert alert-warning" role="alert">
-                        <%= request.getAttribute("error")%>
+                        <%= request.getAttribute(Constantes.ERROR)%>
                     </div>
                     <%  }%>
                     <form role="form" method="POST" action="/web/funcion" enctype="multipart/form-data">
@@ -104,6 +104,10 @@
                         <div class="form-group">
                             <label for="fecha">Fecha de inicio</label>
                             <input name="fecha" type="datetime-local" class="form-control" id="fecha" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="imagen">Foto</label>
+                            <input name="imagen" type="file" class="form-control-file" id="imagen">
                         </div>
                         <select class="form-select" name="invitados" multiple aria-label="multiple select">
                             <option value="0" selected>Se puede seleccionar varios artistas</option>

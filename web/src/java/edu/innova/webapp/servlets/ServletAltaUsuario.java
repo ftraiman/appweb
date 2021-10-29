@@ -52,12 +52,12 @@ public class ServletAltaUsuario extends HttpServlet {
         try {
             UsuarioDTO usuario = new UsuarioDTO(null, tipo, nickname, nombre, apellido, email, fechaNacimiento, descripcion, biografia, link, clave, imagen);
             servicioUsuarios.guardarNuevoUsuario(usuario);
-            req.getRequestDispatcher("principal/login.jsp").forward(req, resp);
+            req.getRequestDispatcher("usuario/login.jsp").forward(req, resp);
             return;
             
         } catch (InnovaModelException e) {
             req.setAttribute(Constantes.ERROR, e.getMessage());
-            req.getRequestDispatcher("principal/signin.jsp").forward(req, resp);
+            req.getRequestDispatcher("usuario/alta.jsp").forward(req, resp);
             return;
         }
     }

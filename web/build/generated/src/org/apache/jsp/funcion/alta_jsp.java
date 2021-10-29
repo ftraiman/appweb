@@ -1,16 +1,21 @@
-package org.apache.jsp.principal;
+package org.apache.jsp.funcion;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
-import edu.innova.webapp.helpers.HelperFechas;
-import edu.innova.webapp.helpers.Constantes;
+import edu.innova.webapp.dtos.EspectaculoDTO;
+import edu.innova.webapp.servlets.ServletAltaEspectaculo;
+import edu.innova.webapp.dtos.InformacionEspectaculoDTO;
+import edu.innova.webapp.servlets.ServletFuncion;
+import edu.innova.webapp.dtos.PlataformaDTO;
 import java.util.List;
-import edu.innova.webapp.servlets.ServletHome;
+import edu.innova.webapp.dtos.CategoriaDTO;
+import edu.innova.webapp.logica.servicios.impl.ServicioMenu;
+import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.servlets.ServletLogin;
 
-public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class alta_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -19,9 +24,9 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
 
   static {
     _jspx_dependants = new java.util.ArrayList<String>(3);
-    _jspx_dependants.add("/principal/../common/lateral.jsp");
-    _jspx_dependants.add("/principal/../common/header.jsp");
-    _jspx_dependants.add("/principal/../common/footer.jsp");
+    _jspx_dependants.add("/funcion/../common/lateral.jsp");
+    _jspx_dependants.add("/funcion/../common/header.jsp");
+    _jspx_dependants.add("/funcion/../common/footer.jsp");
   }
 
   private org.glassfish.jsp.api.ResourceInjector _jspx_resourceInjector;
@@ -59,11 +64,28 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
 
-    String carpeta = "Principal";
-    String pagina = "Inicio";
+    String carpeta = "Función";
+    String pagina = "Alta";
 
-    List<UsuarioDTO> todosLosUsuarios = ServletHome.getTodosLosUsuarios();
+    UsuarioDTO u = (UsuarioDTO) request.getSession().getAttribute("usuario");
+
+    if (u == null || !Constantes.ARTISTA.equalsIgnoreCase(u.getTipo()) || request.getParameter(Constantes.ID_ESPECTACULO) == null) {
+        response.sendRedirect("/web/principal/index.jsp");
+        return;
+    }
+    Long idEspectaculo = Long.valueOf(request.getParameter(Constantes.ID_ESPECTACULO));
+    List<UsuarioDTO> artistasParaInvitar = ServletFuncion.getTodosLosArtisas(u.getId());
+    InformacionEspectaculoDTO infoEspectaculo = ServletAltaEspectaculo.getEspectaculoPorId(idEspectaculo);
+
+    EspectaculoDTO espectaculo = infoEspectaculo.getEspectaculo();
+    CategoriaDTO categoria = infoEspectaculo.getCategoria();
+    PlataformaDTO plataforma = infoEspectaculo.getPlataforma();
 
       out.write("\n");
       out.write("<!DOCTYPE html>\n");
@@ -86,6 +108,8 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link href=\"/web/assets/css/nucleo-svg.css\" rel=\"stylesheet\" />\n");
       out.write("        <!-- CSS Files -->\n");
       out.write("        <link id=\"pagestyle\" href=\"/web/assets/css/soft-ui-dashboard.css\" rel=\"stylesheet\" />\n");
+      out.write("\n");
+      out.write("        <script src=\"/web/assets/js/jquery.js\"></script>\n");
       out.write("    </head>\n");
       out.write("\n");
       out.write("    <body class=\"g-sidenav-show  bg-gray-100\">\n");
@@ -361,110 +385,103 @@ public final class index_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</nav>");
       out.write("\n");
       out.write("            <!-- End Navbar -->\n");
-      out.write("\n");
       out.write("            <div class=\"container-fluid py-4\">\n");
-      out.write("                <div id=\"carouselExampleSlidesOnly\" class=\"carousel slide\" data-ride=\"carousel\">\n");
-      out.write("                    <div class=\"carousel-inner\">\n");
-      out.write("                        <div class=\"carousel-item active\">\n");
-      out.write("                            <img class=\"d-block w-100\" src=\"...\" alt=\"First slide\">\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"carousel-item\">\n");
-      out.write("                            <img class=\"d-block w-100\" src=\"...\" alt=\"Second slide\">\n");
-      out.write("                        </div>\n");
-      out.write("                        <div class=\"carousel-item\">\n");
-      out.write("                            <img class=\"d-block w-100\" src=\"...\" alt=\"Third slide\">\n");
-      out.write("                        </div>\n");
-      out.write("                    </div>\n");
+      out.write("                <div class=\"col-sm-2\">\n");
       out.write("                </div>\n");
-      out.write("            </div>\n");
-      out.write("\n");
-      out.write("            <div class=\"container-fluid py-4\">\n");
-      out.write("                <div class=\"row\">\n");
-      out.write("                    <div class=\"col-12\">\n");
-      out.write("                        <div class=\"card mb-4\">\n");
-      out.write("                            <div class=\"card-header pb-0\">\n");
-      out.write("                                <h6>Nuestra comunidad</h6>\n");
-      out.write("                            </div>\n");
-      out.write("                            <div class=\"card-body px-0 pt-0 pb-2\">\n");
-      out.write("                                <div class=\"table-responsive p-0\">\n");
-      out.write("                                    <table class=\"table align-items-center mb-0\">\n");
-      out.write("                                        <thead>\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <th class=\"text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Usuario</th>\n");
-      out.write("                                                <th class=\"text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2\">Nombre</th>\n");
-      out.write("                                                <th class=\"text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Rol</th>\n");
-      out.write("                                                <th class=\"text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7\">Fecha de nacimiento</th>\n");
-      out.write("                                                <th class=\"text-secondary opacity-7\"></th>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                        </thead>\n");
-      out.write("                                        <tbody>\n");
-      out.write("                                            ");
- if (todosLosUsuarios.size() > 0) {
-                                                    for (UsuarioDTO usuarioSistema : todosLosUsuarios) {
-                                                        String lblTipo = Constantes.ARTISTA.equalsIgnoreCase(usuarioSistema.getTipo()) ? "Artista" : "Espectador";
-                                                        String colorTipo = lblTipo.equals("Artista") ? "success" : "info";
-                                                        String fechaNacimiento = HelperFechas.dateToString(usuarioSistema.getFechaNacimiento(), "dd/MM/yyyy");
-                                            
-      out.write("\n");
-      out.write("                                            <tr>\n");
-      out.write("                                                <td>\n");
-      out.write("                                                    <div class=\"d-flex px-2 py-1\">\n");
-      out.write("                                                        <div>\n");
-      out.write("                                                            <img src=\"/web/imagenes?carpeta=usuarios&archivo=");
-      out.print(usuarioSistema.getImagen());
-      out.write("\" class=\"avatar avatar-sm me-3\" alt=\"");
-      out.print(usuarioSistema.getNickname());
-      out.write("\">\n");
-      out.write("                                                        </div>\n");
-      out.write("                                                        <div class=\"d-flex flex-column justify-content-center\">\n");
-      out.write("                                                            <h6 class=\"mb-0 text-sm\">");
-      out.print(usuarioSistema.getNickname());
-      out.write("</h6>\n");
-      out.write("                                                            <p class=\"text-xs text-secondary mb-0\">");
-      out.print(usuarioSistema.getEmail());
+      out.write("                <div class=\"col-sm-8\">\n");
+      out.write("                    <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                        <h1>Alta de Función</h1>\n");
+      out.write("                    </div>\n");
+      out.write("                    <div class=\"row\">\n");
+      out.write("                        <div class=\"col-xl-6 col-sm-6 mb-xl-0 mb-4\">\n");
+      out.write("                            <div class=\"card\">\n");
+      out.write("                                <div class=\"card-body p-3\">\n");
+      out.write("                                    <div class=\"row\">\n");
+      out.write("                                        <div class=\"col-8\">\n");
+      out.write("                                            <div class=\"numbers\">\n");
+      out.write("                                                <p class=\"text-sm mb-0 text-capitalize font-weight-bold\">");
+      out.print(espectaculo.getNombre());
       out.write("</p>\n");
-      out.write("                                                        </div>\n");
-      out.write("                                                    </div>\n");
-      out.write("                                                </td>\n");
-      out.write("                                                <td>\n");
-      out.write("                                                    <p class=\"text-xs font-weight-bold mb-0\">");
-      out.print(usuarioSistema.getNombre());
-      out.write(' ');
-      out.print(usuarioSistema.getApellido());
+      out.write("                                                <h5 class=\"font-weight-bolder mb-0\">\n");
+      out.write("                                                    $");
+      out.print(espectaculo.getCosto());
+      out.write("    \n");
+      out.write("                                                </h5>\n");
+      out.write("                                                <p class=\"text-sm mb-0 text-capitalize font-weight-bold\">Categoría: ");
+      out.print(categoria.getNombre());
       out.write("</p>\n");
-      out.write("                                                </td>\n");
-      out.write("                                                <td class=\"align-middle text-center text-sm\">\n");
-      out.write("                                                    <span class=\"badge badge-sm bg-gradient-");
-      out.print(colorTipo);
-      out.write('"');
-      out.write('>');
-      out.print(lblTipo);
-      out.write("</span>\n");
-      out.write("                                                </td>\n");
-      out.write("                                                <td class=\"align-middle text-center\">\n");
-      out.write("                                                    <span class=\"text-secondary text-xs font-weight-bold\">");
-      out.print(fechaNacimiento);
-      out.write("</span>\n");
-      out.write("                                                </td>\n");
-      out.write("                                                <td class=\"align-middle\">\n");
-      out.write("                                                    <a class=\"btn btn-link pe-3 ps-0 mb-0 ms-auto\" href=\"/web/informacionusuario?idUsuario=");
-      out.print(usuarioSistema.getId());
-      out.write("\">Ver perfil</a>\n");
-      out.write("                                                    <!--                                                    <a href=\"javascript:;\" class=\"text-secondary font-weight-bold text-xs\" data-toggle=\"tooltip\" data-original-title=\"Edit user\">\n");
-      out.write("                                                                                                            Ver perfil\n");
-      out.write("                                                                                                        </a>-->\n");
-      out.write("                                                </td>\n");
-      out.write("                                            </tr>\n");
-      out.write("                                            ");
-  }
-                                              }
-      out.write("\n");
-      out.write("                                        </tbody>\n");
-      out.write("                                    </table>\n");
+      out.write("                                                <p class=\"text-sm mb-0 text-capitalize font-weight-bold\">Plataforma: ");
+      out.print(plataforma.getNombre());
+      out.write("</p>\n");
+      out.write("                                            </div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                        <div class=\"col-4 text-end\">\n");
+      out.write("                                            <div class=\"icon icon-shape bg-gradient-primary shadow text-center border-radius-md\">\n");
+      out.write("                                                <i class=\"ni ni-basket text-lg opacity-10\" aria-hidden=\"true\"></i>\n");
+      out.write("                                            </div>\n");
+      out.write("                                        </div>\n");
+      out.write("                                    </div>\n");
       out.write("                                </div>\n");
       out.write("                            </div>\n");
       out.write("                        </div>\n");
       out.write("                    </div>\n");
+      out.write("                    ");
+  if (request.getAttribute(Constantes.ERROR) != null) {
+      out.write("\n");
+      out.write("                    <br />\n");
+      out.write("                    <div class=\"alert alert-warning\" role=\"alert\">\n");
+      out.write("                        ");
+      out.print( request.getAttribute(Constantes.ERROR));
+      out.write("\n");
+      out.write("                    </div>\n");
+      out.write("                    ");
+  }
+      out.write("\n");
+      out.write("                    <form role=\"form\" method=\"POST\" action=\"/web/funcion\" enctype=\"multipart/form-data\">\n");
+      out.write("                        <div class=\"form-group\">\n");
+      out.write("                            <input type=\"hidden\" name=\"idEspectaculo\" id=\"idEspectaculo\" value=\"");
+      out.print(idEspectaculo);
+      out.write("\" />\n");
+      out.write("                            <label for=\"nombre\">Nombre</label>\n");
+      out.write("                            <input name=\"nombre\" type=\"text\" class=\"form-control\" id=\"nombre\" required>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"form-group\">\n");
+      out.write("                            <label for=\"fecha\">Fecha de inicio</label>\n");
+      out.write("                            <input name=\"fecha\" type=\"datetime-local\" class=\"form-control\" id=\"fecha\" required>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"form-group\">\n");
+      out.write("                            <label for=\"imagen\">Foto</label>\n");
+      out.write("                            <input name=\"imagen\" type=\"file\" class=\"form-control-file\" id=\"imagen\">\n");
+      out.write("                        </div>\n");
+      out.write("                        <select class=\"form-select\" name=\"invitados\" multiple aria-label=\"multiple select\">\n");
+      out.write("                            <option value=\"0\" selected>Se puede seleccionar varios artistas</option>\n");
+      out.write("                            ");
+ for (UsuarioDTO artista : artistasParaInvitar) {
+      out.write("\n");
+      out.write("                            <option value=\"");
+      out.print(artista.getId());
+      out.write('"');
+      out.write('>');
+      out.print(artista.getNombre());
+      out.write(' ');
+      out.print(artista.getApellido());
+      out.write("</option>\n");
+      out.write("                            ");
+ }
+      out.write("\n");
+      out.write("                        </select>\n");
+      out.write("                        <!--                        <div class=\"form-group\">\n");
+      out.write("                                                    <label for=\"imagen\">Imagen</label>\n");
+      out.write("                                                    <input name=\"imagen\" type=\"file\" class=\"form-control-file\" id=\"imagen\">\n");
+      out.write("                                                </div>-->\n");
+      out.write("                        <br />\n");
+      out.write("                        <div class=\"form-group\" style=\"text-align: center\">\n");
+      out.write("                            <button type=\"submit\" class=\"btn btn-linkedin\">Alta de Función</button>\n");
+      out.write("                        </div>\n");
+      out.write("\n");
+      out.write("                    </form>\n");
+      out.write("                </div>\n");
+      out.write("                <div class=\"col-sm-2\">\n");
       out.write("                </div>\n");
       out.write("            </div>\n");
       out.write("            ");

@@ -31,5 +31,7 @@ public interface ServicioEspectaculos {
     InformacionCanjeTresPorUno getInfoCanjeTresPorUno(Long idUsuario);
 
     void canjeTresPorUno(CanjeTresPorUnoDTO ctpudto);
+    
+    List<EspectaculoDTO> getTodosLosEspectaculos();
 
 }

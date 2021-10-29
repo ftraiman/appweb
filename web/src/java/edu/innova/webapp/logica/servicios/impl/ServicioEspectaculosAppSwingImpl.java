@@ -14,9 +14,12 @@ import edu.innova.webapp.dtos.InformacionCanjeTresPorUno;
 import edu.innova.webapp.dtos.PlataformaDTO;
 import edu.innova.webapp.logica.servicios.ServicioEspectaculos;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
@@ -110,8 +113,9 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
                 .stream()
                 .map(ServicioUsuariosAppSwingImpl::usuarioDtoMapper)
                 .collect(Collectors.toList());
+        
         return new edu.innova.logica.dtos.FuncionDTO(funcion.getNombre(), funcion.getIdEspectaculo(), funcion.getFechaInicio(),
-                funcion.getFechaRegistro(), artistasInvitados, null);
+                funcion.getFechaRegistro(), artistasInvitados, funcion.getImagen());
     }
 
     private static FuncionDTO funcionMapper(edu.innova.logica.dtos.FuncionDTO funcion) {
@@ -150,6 +154,19 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
     @Override
     public void canjeTresPorUno(CanjeTresPorUnoDTO ctpudto) {
         funcionControlador.canjearFunciones(canjeTresPorUnoMapper(ctpudto));
+    }
+    
+    @Override
+    public List<EspectaculoDTO> getTodosLosEspectaculos()  {
+        try {
+            return espectaculoControlador.getTodosLosEspectaculosDTO()
+                    .stream()
+                    .filter(espectaculo -> "aceptado".equalsIgnoreCase(espectaculo.getEstado()))
+                    .map(espectaculo -> espectaculoMapper(espectaculo))
+                    .collect(Collectors.toList());
+        } catch (SQLException ex) {   
+        }
+        return null;
     }
 
     private edu.innova.logica.dtos.CanjeTresPorUnoDTO canjeTresPorUnoMapper(CanjeTresPorUnoDTO ctpudto) {

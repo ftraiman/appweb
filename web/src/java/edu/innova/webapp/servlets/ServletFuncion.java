@@ -28,6 +28,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 
 @WebServlet(name = "funcion", urlPatterns = {"/funcion"})
 @MultipartConfig
@@ -62,7 +63,21 @@ public class ServletFuncion extends HttpServlet {
         if (usuariosInvitados.stream().anyMatch(usuario -> usuario.getId() == 0)) {
             usuariosInvitados = new ArrayList<>();
         }
-        FuncionDTO nuevaFuncion = new FuncionDTO(nombre, idEspectaculo, fechaInicio, new Date(), usuariosInvitados, null);
+        
+        String imagen = null;
+
+        if (req.getPart("imagen") != null) {
+            Part part = req.getPart("imagen");
+            imagen = helperImagenes.crearNombreArchivo(part, nombre);
+            if (null != imagen) {
+                if (!helperImagenes.guardarImagen(part, HelperImagenes.CarpetaDestinoImagenes.FUNCIONES, imagen)) {
+                    imagen = null;
+                }
+            }
+        }
+        
+        
+        FuncionDTO nuevaFuncion = new FuncionDTO(nombre, idEspectaculo, fechaInicio, new Date(), usuariosInvitados, imagen);
 
         try {
             servicioEspectaculos.altaFuncion(nuevaFuncion);
