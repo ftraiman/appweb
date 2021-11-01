@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c70e800a-a5fa-4fdc-9152-a57d0cdfc359" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/logica/servicios/ServicioSeguidores.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletInformacionUsuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletModificarUsuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/usuario/perfil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../imagenes/usuarios/colimba.jpeg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/principal/index_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/principal/index_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/principal/login_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/principal/login_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/usuario/miperfil_jsp.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/classes/org/apache/jsp/usuario/miperfil_jsp.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/index_jsp.class.smap" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/index_jsp.class.smap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/index_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/index_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/login_jsp.class.smap" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/login_jsp.class.smap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/login_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/principal/login_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/usuario/miperfil_jsp.class.smap" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/usuario/miperfil_jsp.class.smap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/usuario/miperfil_jsp.java" beforeDir="false" afterPath="$PROJECT_DIR$/build/generated/src/org/apache/jsp/usuario/miperfil_jsp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/dtos/UsuarioDTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/dtos/UsuarioDTO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/helpers/Constantes.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/helpers/Constantes.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/logica/servicios/ServicioUsuarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/logica/servicios/ServicioUsuarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/logica/servicios/impl/ServicioUsuariosAppWebImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletAltaUsuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletAltaUsuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletHome.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletHome.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletLogin.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/classes/edu/innova/webapp/servlets/ServletLogin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/WEB-INF/lib/Proyecto_V.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/WEB-INF/lib/Proyecto_V.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/principal/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/principal/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/template.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/template.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/web/usuario/miperfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/build/web/usuario/miperfil.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/dtos/UsuarioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/dtos/UsuarioDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/helpers/Constantes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/helpers/Constantes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/logica/servicios/ServicioUsuarios.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/logica/servicios/ServicioUsuarios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/logica/servicios/impl/ServicioUsuariosAppWebImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/logica/servicios/impl/ServicioUsuariosAppSwingImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletAltaUsuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletAltaUsuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletLogin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/edu/innova/webapp/servlets/ServletLogin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/principal/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/principal/index.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/template.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/template.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/usuario/miperfil.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/web/usuario/miperfil.jsp" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="2" />
+  </component>
+  <component name="ProjectId" id="1z8fCmZ1NK0CvfMIN0NVhfrubdT" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.22068965" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="com.poratu.idea.plugins.tomcat.setting.TomcatSettingConfigurable" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+      <option name="arquillianRunConfiguration">
+        <value>
+          <option name="containerStateName" value="" />
+        </value>
+      </option>
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat" type="com.poratu.idea.plugins.tomcat" factoryName="SMART_TOMCAT_FACTORY">
+      <option name="adminPort" value="8005" />
+      <option name="contextPath" value="/web" />
+      <option name="docBase" value="$PROJECT_DIR$/web" />
+      <option name="envOptions" />
+      <option name="passParentEnvironmentVariables" value="true" />
+      <option name="port" value="8080" />
+      <option name="tomcatInfo">
+        <TomcatInfo>
+          <option name="name" value="Apache Tomcat/8.5.70" />
+          <option name="number" value="0" />
+          <option name="path" value="$PROJECT_DIR$/../apache-tomcat-8.5.70" />
+          <option name="version" value="8.5.70.0" />
+        </TomcatInfo>
+      </option>
+      <option name="vmOptions" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="com.poratu.idea.plugins.tomcat" factoryName="SMART_TOMCAT_FACTORY">
+      <option name="adminPort" value="8005" />
+      <option name="contextPath" />
+      <option name="docBase" />
+      <option name="envOptions" />
+      <option name="passParentEnvironmentVariables" value="true" />
+      <option name="port" value="8080" />
+      <option name="tomcatInfo" />
+      <option name="vmOptions" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="js.build_tools.grunt">
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="js.build_tools.gulp">
+      <node-interpreter>project</node-interpreter>
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <arguments />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c70e800a-a5fa-4fdc-9152-a57d0cdfc359" name="Changes" comment="" />
+      <created>1633534513001</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1633534513001</updated>
+      <workItem from="1633534521829" duration="884000" />
+      <workItem from="1633535424786" duration="2039000" />
+      <workItem from="1633971556198" duration="42000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
