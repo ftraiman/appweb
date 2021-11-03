@@ -27,16 +27,16 @@
                         if (usuario != null) {
                     %>
                     <span class="d-sm-inline d-none"><%= usuario.getNickname()%></span>
-                    <form action="/web/login" method="GET">
+                    <form action="/webV2/login" method="GET">
                         <input type="hidden" value="logout" name="logout">
                         <button  type="submit" id="link-button" style=" background: none; border: none; color: #1a0dab; text-decoration: underline; cursor: pointer;"> Log out</button>
                     </form>
                     <% } else { %>
                     <i class="fa fa-user me-sm-1"></i>
-                    <a href="/web/usuario/login.jsp" class="nav-link text-body font-weight-bold px-0">
+                    <a href="/webV2/usuario/login.jsp" class="nav-link text-body font-weight-bold px-0">
                         <span class="d-sm-inline d-none">Log in</span>
                     </a> /
-                    <a href="/web/usuario/alta.jsp" class="nav-link text-body font-weight-bold px-0">
+                    <a href="/webV2/usuario/alta.jsp" class="nav-link text-body font-weight-bold px-0">
                         <span class="d-sm-inline d-none">Registrarse</span>
                     </a>
                     

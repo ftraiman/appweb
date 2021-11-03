@@ -17,21 +17,21 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/web/assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="/web/assets/img/favicon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/webV2/assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="/webV2/assets/img/favicon.png">
         <title>
             Coronatickets.uy
         </title>
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Nucleo Icons -->
-        <link href="/web/assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
-        <link id="pagestyle" href="/web/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+        <link id="pagestyle" href="/webV2/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
@@ -46,11 +46,11 @@
                 <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=todosLosEspectaculos.get(0).getImagen()%>" style="height: 200px" class="" alt="">
+                            <img src="/webV2/imagenes?carpeta=espectaculos&archivo=<%=todosLosEspectaculos.get(0).getImagen()%>" style="height: 200px" class="" alt="">
                         </div>
                         <% for (EspectaculoDTO espectaculo : todosLosEspectaculos) {%>
                         <div class="carousel-item">
-                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=espectaculo.getImagen()%>" style="height: 200px" class="" alt="<%=espectaculo.getNombre()%>">
+                            <img src="/webV2/imagenes?carpeta=espectaculos&archivo=<%=espectaculo.getImagen()%>" style="height: 200px" class="" alt="<%=espectaculo.getNombre()%>">
                             <div class="carousel-caption d-none d-md-block">
                                 <h5 style="color: red;"><%=espectaculo.getNombre()%></h5>
                                 <p><%=espectaculo.getDescripcion()%></p>
@@ -99,7 +99,7 @@
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
                                                         <div>
-                                                            <img src="/web/imagenes?carpeta=usuarios&archivo=<%=usuarioSistema.getImagen()%>" class="avatar avatar-sm me-3" alt="<%=usuarioSistema.getNickname()%>">
+                                                            <img src="/webV2/imagenes?carpeta=usuarios&archivo=<%=usuarioSistema.getImagen()%>" class="avatar avatar-sm me-3" alt="<%=usuarioSistema.getNickname()%>">
                                                         </div>
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm"><%=usuarioSistema.getNickname()%></h6>
@@ -117,7 +117,7 @@
                                                     <span class="text-secondary text-xs font-weight-bold"><%=fechaNacimiento%></span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/informacionusuario?idUsuario=<%=usuarioSistema.getId()%>">Ver perfil</a>
+                                                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/informacionusuario?idUsuario=<%=usuarioSistema.getId()%>">Ver perfil</a>
                                                     <!--                                                    <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                                                                             Ver perfil
                                                                                                         </a>-->
@@ -136,11 +136,11 @@
             <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->
-        <script src="/web/assets/js/core/popper.min.js"></script>
-        <script src="/web/assets/js/core/bootstrap.min.js"></script>
-        <script src="/web/assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/chartjs.min.js"></script>
+        <script src="/webV2/assets/js/core/popper.min.js"></script>
+        <script src="/webV2/assets/js/core/bootstrap.min.js"></script>
+        <script src="/webV2/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/chartjs.min.js"></script>
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -153,7 +153,7 @@
         <!--         Github buttons 
                 <script async defer src="https://buttons.github.io/buttons.js"></script>-->
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/web/assets/js/soft-ui-dashboard.min.js"></script>
+        <script src="/webV2/assets/js/soft-ui-dashboard.min.js"></script>
     </body>
 
 </html>

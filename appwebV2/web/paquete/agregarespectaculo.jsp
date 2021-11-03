@@ -17,7 +17,7 @@
 
     UsuarioDTO usuarioSession = (UsuarioDTO) request.getSession().getAttribute("usuario");
     if (usuarioSession == null || !Constantes.ARTISTA.equalsIgnoreCase(usuarioSession.getTipo()) || request.getParameter("idPaquete") == null) {
-        response.sendRedirect("/web/principal/index.jsp");
+        response.sendRedirect("/webV2/principal/index.jsp");
         return;
     }
 
@@ -35,23 +35,23 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/web/assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="/web/assets/img/favicon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/webV2/assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="/webV2/assets/img/favicon.png">
         <title>
             Coronatickets.uy
         </title>
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Nucleo Icons -->
-        <link href="/web/assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
-        <link id="pagestyle" href="/web/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+        <link id="pagestyle" href="/webV2/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
-        <script src="/web/assets/js/jquery.js"></script>
+        <script src="/webV2/assets/js/jquery.js"></script>
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
@@ -74,7 +74,7 @@
                                 <div class="card card-blog card-plain">
                                     <div class="position-relative">
                                         <a class="d-block shadow-xl border-radius-xl">
-                                            <img src="/web/imagenes?carpeta=paquetes&archivo=<%=p.getImagen()%>" class="img-fluid shadow border-radius-xl" style="height: 200px ">
+                                            <img src="/webV2/imagenes?carpeta=paquetes&archivo=<%=p.getImagen()%>" class="img-fluid shadow border-radius-xl" style="height: 200px ">
                                         </a>
                                     </div>
                                     <div class="card-body px-1 pb-0">
@@ -102,7 +102,7 @@
                     <div class="col-xl-4 col-md-6 mb-xl-0 mb-4 col-sm-0"></div>
                     <div class="col-xl-4 col-md-6 mb-xl-0 mb-4" style="text-align: center">
                         <h5 style="text-align: center;">Agregar un nuevo Espectáculo al Paquete</h5>
-                        <form role="form" method="POST" action="/web/paquete" enctype="multipart/form-data">
+                        <form role="form" method="POST" action="/webV2/paquete" enctype="multipart/form-data">
                             <input type="hidden" name="operacion" value="espectaculoapaquete"/>
                             <input type="hidden" name="idPaquete" value="<%=id%>"/>
                             <% for (EspectaculoDTO espectaculoDTO : espectaculosNoIncluidosEnPaquete) {%>
@@ -161,7 +161,7 @@
                                                         <td>
                                                             <div class="d-flex px-2 py-1">
                                                                 <div>
-                                                                    <img src="/web/imagenes?carpeta=paquetes&archivo=<%=imagen%>" class="avatar avatar-sm me-3" alt="<%=nombre%>">
+                                                                    <img src="/webV2/imagenes?carpeta=paquetes&archivo=<%=imagen%>" class="avatar avatar-sm me-3" alt="<%=nombre%>">
                                                                 </div>
                                                                 <div class="d-flex flex-column justify-content-center">
                                                                     <h6 class="mb-0 text-sm"><%=nombre%></h6>
@@ -193,11 +193,11 @@
             <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->
-        <script src="/web/assets/js/core/popper.min.js"></script>
-        <script src="/web/assets/js/core/bootstrap.min.js"></script>
-        <script src="/web/assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/chartjs.min.js"></script>
+        <script src="/webV2/assets/js/core/popper.min.js"></script>
+        <script src="/webV2/assets/js/core/bootstrap.min.js"></script>
+        <script src="/webV2/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/chartjs.min.js"></script>
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -210,7 +210,7 @@
         <!--         Github buttons 
                 <script async defer src="https://buttons.github.io/buttons.js"></script>-->
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/web/assets/js/soft-ui-dashboard.min.js"></script>
+        <script src="/webV2/assets/js/soft-ui-dashboard.min.js"></script>
     </body>
 
 </html>

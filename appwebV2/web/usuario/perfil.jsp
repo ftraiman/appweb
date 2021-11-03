@@ -35,23 +35,23 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="apple-touch-icon" sizes="76x76" href="/web/assets/img/apple-icon.png">
-        <link rel="icon" type="image/png" href="/web/assets/img/favicon.png">
+        <link rel="apple-touch-icon" sizes="76x76" href="/webV2/assets/img/apple-icon.png">
+        <link rel="icon" type="image/png" href="/webV2/assets/img/favicon.png">
         <title>
             Coronatickets.uy
         </title>
         <!--     Fonts and icons     -->
         <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
         <!-- Nucleo Icons -->
-        <link href="/web/assets/css/nucleo-icons.css" rel="stylesheet" />
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-icons.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- Font Awesome Icons -->
         <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-        <link href="/web/assets/css/nucleo-svg.css" rel="stylesheet" />
+        <link href="/webV2/assets/css/nucleo-svg.css" rel="stylesheet" />
         <!-- CSS Files -->
-        <link id="pagestyle" href="/web/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
+        <link id="pagestyle" href="/webV2/assets/css/soft-ui-dashboard.css" rel="stylesheet" />
 
-        <script src="/web/assets/js/jquery.js"></script>
+        <script src="/webV2/assets/js/jquery.js"></script>
     </head>
 
     <body class="g-sidenav-show  bg-gray-100">
@@ -63,14 +63,14 @@
             <!-- End Navbar -->
             <div class="container-fluid py-4">
                 <div class="container-fluid">
-                    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/web/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
+                    <div class="page-header min-height-300 border-radius-xl mt-4" style="background-image: url('/webV2/assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
                         <span class="mask bg-gradient-primary opacity-6"></span>
                     </div>
                     <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
                         <div class="row gx-4">
                             <div class="col-auto">
                                 <div class="avatar avatar-xl position-relative">
-                                    <img src="/web/imagenes?carpeta=usuarios&archivo=<%=usuarioInfo.getImagen()%>" alt="profile_image" class="w-100 border-radius-lg shadow-sm" >
+                                    <img src="/webV2/imagenes?carpeta=usuarios&archivo=<%=usuarioInfo.getImagen()%>" alt="profile_image" class="w-100 border-radius-lg shadow-sm" >
                                 </div>
                             </div>
                             <div class="col-auto my-auto">
@@ -89,9 +89,9 @@
                                     <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
                                         <li class="nav-item">
                                             <% if (puedeSeguirUsuario) {%>
-                                            <a class="nav-link mb-0 px-0 py-1 active " href="/web/modificarusuario?seguirusuario=<%=usuarioInfo.getId()%>" />
+                                            <a class="nav-link mb-0 px-0 py-1 active " href="/webV2/modificarusuario?seguirusuario=<%=usuarioInfo.getId()%>" />
                                             <% } else {%>
-                                            <a class="nav-link mb-0 px-0 py-1 active " href="/web/modificarusuario?dejardeseguir=<%=usuarioInfo.getId()%>" />
+                                            <a class="nav-link mb-0 px-0 py-1 active " href="/webV2/modificarusuario?dejardeseguir=<%=usuarioInfo.getId()%>" />
                                             <% }%>
                                             <span class="ms-1"><%=lblSeguirUsuario%></span>
                                             </a>
@@ -117,13 +117,13 @@
                                         %>
                                         <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div class="avatar me-3">
-                                                <img src="/web/imagenes?carpeta=usuarios&archivo=<%=usuarioqueSigue.getImagen()%>" alt="<%=usuarioqueSigue.getNickname()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                                <img src="/webV2/imagenes?carpeta=usuarios&archivo=<%=usuarioqueSigue.getImagen()%>" alt="<%=usuarioqueSigue.getNickname()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm"><%=usuarioqueSigue.getNickname()%></h6>
                                                 <p class="mb-0 text-xs"><%=usuarioqueSigue.getNombre()%> <%=usuarioqueSigue.getApellido()%></p>
                                             </div>
-                                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/informacionusuario?idUsuario=<%=usuarioqueSigue.getId()%>">Ver perfil</a>
+                                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/informacionusuario?idUsuario=<%=usuarioqueSigue.getId()%>">Ver perfil</a>
                                         </li>
                                         <% }
                                             }%>
@@ -143,13 +143,13 @@
                                         %>
                                         <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
                                             <div class="avatar me-3">
-                                                <img src="/web/imagenes?carpeta=usuarios&archivo=<%=usuarioqueLoSigue.getImagen()%>" alt="<%=usuarioqueLoSigue.getNickname()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                                <img src="/webV2/imagenes?carpeta=usuarios&archivo=<%=usuarioqueLoSigue.getImagen()%>" alt="<%=usuarioqueLoSigue.getNickname()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
                                             </div>
                                             <div class="d-flex align-items-start flex-column justify-content-center">
                                                 <h6 class="mb-0 text-sm"><%=usuarioqueLoSigue.getNickname()%></h6>
                                                 <p class="mb-0 text-xs"><%=usuarioqueLoSigue.getNombre()%> <%=usuarioqueLoSigue.getApellido()%></p>
                                             </div>
-                                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/informacionusuario?idUsuario=<%=usuarioqueLoSigue.getId()%>">Ver perfil</a>
+                                            <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/informacionusuario?idUsuario=<%=usuarioqueLoSigue.getId()%>">Ver perfil</a>
                                         </li>
                                         <% }
                                             }%>
@@ -201,7 +201,7 @@
                                                 <td>
                                                     <div class="d-flex px-2 py-1">
                                                         <div>
-                                                            <img src="/web/imagenes?carpeta=espectaculos&archivo=<%=espectaculo.getImagen()%>" class="avatar avatar-sm me-3" alt="<%=espectaculo.getNombre()%>">
+                                                            <img src="/webV2/imagenes?carpeta=espectaculos&archivo=<%=espectaculo.getImagen()%>" class="avatar avatar-sm me-3" alt="<%=espectaculo.getNombre()%>">
                                                         </div>
                                                         <div class="d-flex flex-column justify-content-center">
                                                             <h6 class="mb-0 text-sm"><%=espectaculo.getNombre()%></h6>
@@ -225,7 +225,7 @@
                                                     <span class="text-secondary text-xs font-weight-bold"><%=espectaculo.getUrl()%></span>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/web/espectaculo/detalle.jsp?idEspectaculo=<%=espectaculo.getId()%>">Ver más detalles</a>                                                    
+                                                    <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=espectaculo.getId()%>">Ver más detalles</a>                                                    
                                                 </td>
                                             </tr>
                                           <%  } } %>
@@ -243,11 +243,11 @@
                 <%@include file="../common/footer.jsp" %>
         </main>
         <!--   Core JS Files   -->
-        <script src="/web/assets/js/core/popper.min.js"></script>
-        <script src="/web/assets/js/core/bootstrap.min.js"></script>
-        <script src="/web/assets/js/plugins/perfect-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/smooth-scrollbar.min.js"></script>
-        <script src="/web/assets/js/plugins/chartjs.min.js"></script>
+        <script src="/webV2/assets/js/core/popper.min.js"></script>
+        <script src="/webV2/assets/js/core/bootstrap.min.js"></script>
+        <script src="/webV2/assets/js/plugins/perfect-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/smooth-scrollbar.min.js"></script>
+        <script src="/webV2/assets/js/plugins/chartjs.min.js"></script>
         <script>
             var win = navigator.platform.indexOf('Win') > -1;
             if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -260,7 +260,7 @@
         <!--         Github buttons 
                 <script async defer src="https://buttons.github.io/buttons.js"></script>-->
         <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-        <script src="/web/assets/js/soft-ui-dashboard.min.js"></script>
+        <script src="/webV2/assets/js/soft-ui-dashboard.min.js"></script>
     </body>
 
 </html>
