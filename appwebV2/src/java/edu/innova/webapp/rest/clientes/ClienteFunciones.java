@@ -37,7 +37,7 @@ public class ClienteFunciones extends AbstractRest {
     }
 
     public RespuestaDTO altaFuncion(FuncionDTO funcion) {
-        return (RespuestaDTO) postEntity(FUNCION_ALTA, funcion, FuncionDTO.class);
+        return (RespuestaDTO) postEntity(FUNCION_ALTA, funcion, RespuestaDTO.class);
     }
 
     public FuncionDTO getFuncionPorId(Long idFuncion) {

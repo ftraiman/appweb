@@ -76,7 +76,6 @@ public class ServletFuncion extends HttpServlet {
             }
         }
         
-        
         FuncionDTO nuevaFuncion = new FuncionDTO(nombre, idEspectaculo, fechaInicio, new Date(), usuariosInvitados, imagen);
 
         try {
