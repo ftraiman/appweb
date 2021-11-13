@@ -14,6 +14,7 @@ public class HelperProperties {
     private static String RUTA_ESPECTACULOS;
     private static String RUTA_PAQUETES;
     private static String RUTA_FUNCIONES;
+    private static String RUTA_BASE_WS;
     private HelperProperties helperProperties;
 
     public HelperProperties() {
@@ -29,6 +30,7 @@ public class HelperProperties {
                 RUTA_ESPECTACULOS = properties.getProperty("ruta.imagenes.espectaculos");
                 RUTA_PAQUETES = properties.getProperty("ruta.imagenes.paquetes");
                 RUTA_FUNCIONES = properties.getProperty("ruta.imagenes.funciones");
+                RUTA_BASE_WS = properties.getProperty("ruta.base.ws");
             } catch (IOException ex) {
                 Logger.getLogger(HelperProperties.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -67,4 +69,10 @@ public class HelperProperties {
     public String getRUTA_FUNCIONES() {
         return RUTA_FUNCIONES;
     }
+
+    public static String getRUTA_BASE_WS() {
+        return RUTA_BASE_WS;
+    }
+    
+    
 }

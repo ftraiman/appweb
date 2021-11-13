@@ -3,7 +3,7 @@ package edu.innova.webapp.servlets;
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
 import edu.innova.webapp.dtos.InformacionCanjePaqueteDTO;
-import edu.innova.webapp.dtos.InformacionCanjeTresPorUno;
+import edu.innova.webapp.dtos.InformacionCanjeTresPorUnoDTO;
 import edu.innova.webapp.dtos.InformacionFuncionDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.helpers.Constantes;
@@ -132,7 +132,7 @@ public class ServletFuncion extends HttpServlet {
         return informacionFuncion;
     }
     
-    public static InformacionCanjeTresPorUno getInfoCanjeTresPorUno(Long idUsuario) {
+    public static InformacionCanjeTresPorUnoDTO getInfoCanjeTresPorUno(Long idUsuario) {
         return servicioEspectaculos.getInfoCanjeTresPorUno(idUsuario);
     }
     

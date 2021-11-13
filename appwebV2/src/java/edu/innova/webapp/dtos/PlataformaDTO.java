@@ -34,4 +34,20 @@ public class PlataformaDTO {
         return url;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
 }

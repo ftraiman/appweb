@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Home", urlPatterns = {"/Home"})
 
 public class ServletHome extends HttpServlet {
-    
+
     final static ServicioUsuarios servicioUsuarios = ServicioUsuariosAppSwingImpl.getInstance();
     final static ServicioEspectaculos servicioEspectaculos = ServicioEspectaculosAppSwingImpl.getInstance();
 
@@ -34,9 +34,9 @@ public class ServletHome extends HttpServlet {
     public static List<UsuarioDTO> getTodosLosUsuarios() {
         return servicioUsuarios.getTodosLosUsuarios();
     }
-    
+
     public static List<EspectaculoDTO> getTodosLosEspectaculos() {
-        return servicioEspectaculos.getTodosLosEspectaculos();
+        return servicioEspectaculos.getTodosLosEspectaculosAceptados();
     }
-    
+
 }

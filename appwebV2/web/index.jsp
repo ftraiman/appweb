@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: federico
-  Date: 6/10/21
-  Time: 12:37
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    response.sendRedirect("/webV2/principal/index.jsp");
+
+%>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+    <head>
+        <meta http-equiv="refresh" content="1; URL=/webV2/principal/index.jsp" />
+    </head>
+    <body>
+        $END$
+    </body>
 </html>

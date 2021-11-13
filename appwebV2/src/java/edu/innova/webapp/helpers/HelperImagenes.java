@@ -28,7 +28,7 @@ public class HelperImagenes {
     };
 
     public boolean guardarImagen(Part filePart, CarpetaDestinoImagenes destino, String nombreImagen) {
-        String imageName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        String imageName = Paths.get(filePart.getName()).getFileName().toString();
         String imageSavePath = helperProperties.getRUTA_PROYECTO() + getCarpetaDestino(destino) + File.separator + nombreImagen;
 
         FileOutputStream outputStream = null;
@@ -77,7 +77,7 @@ public class HelperImagenes {
     
     public String crearNombreArchivo(Part part, String nickname) {
         if (part != null) {
-            String imageName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+            String imageName = Paths.get(part.getName()).getFileName().toString();
             String[] split = imageName.split("\\.");
 
             if (split.length > 1) {

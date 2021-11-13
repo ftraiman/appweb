@@ -18,6 +18,7 @@ import edu.innova.webapp.logica.servicios.impl.ServicioPaquetesAppSwingImpl;
 import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -133,6 +134,12 @@ public class ServletAltaEspectaculo extends HttpServlet {
     }
     
     public static List<EspectaculoDTO> getEspectaculosPorPlataformaCategoria(Long idPlataforma, Long idCategoria) {
+        if (idPlataforma == null && idCategoria == null) {
+            return new ArrayList<EspectaculoDTO>();
+        }
+        idPlataforma = idPlataforma != null ? idPlataforma : Long.valueOf(-1);
+        idCategoria = idCategoria != null ? idCategoria : Long.valueOf(-1);
+        
         return servicioEspectaculos.getEspectaculosPorCategoriaPlataforma(idPlataforma, idCategoria);
     }
 }

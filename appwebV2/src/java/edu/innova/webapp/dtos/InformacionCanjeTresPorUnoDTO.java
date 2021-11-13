@@ -2,7 +2,7 @@ package edu.innova.webapp.dtos;
 
 import java.util.List;
 
-public class InformacionCanjeTresPorUno {
+public class InformacionCanjeTresPorUnoDTO {
 
     private Boolean isCanjeDisponible;
     private List<FuncionDTO> funcionesCanjeables;
