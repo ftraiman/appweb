@@ -5,6 +5,7 @@ import edu.innova.webapp.dtos.ErrorDTO;
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
 import edu.innova.webapp.dtos.PlataformaDTO;
+import edu.innova.webapp.dtos.RespuestaDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.exceptions.InnovaModelException;
 import edu.innova.webapp.helpers.HelperProperties;
@@ -88,7 +89,7 @@ abstract class AbstractRest<T> {
                     .request(MediaType.APPLICATION_JSON)
                     .post(Entity.json(contenido));
             if (respuesta.getStatus() == 400) {
-                ErrorDTO e = respuesta.readEntity(ErrorDTO.class);
+                RespuestaDTO e = respuesta.readEntity(RespuestaDTO.class);
                 throw new InnovaModelException(e.getMensaje());
             }
             return respuesta.readEntity(claseRespuesta);

@@ -32,7 +32,7 @@ public class ServletLogin extends HttpServlet {
              
         } catch (InnovaModelException e) {
             req.setAttribute(Constantes.ERROR, e.getMessage());
-            RequestDispatcher view = req.getRequestDispatcher("principal/login.jsp");
+            RequestDispatcher view = req.getRequestDispatcher("usuario/login.jsp");
             view.forward(req, resp);
             return;
         }
