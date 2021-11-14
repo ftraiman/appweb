@@ -20,6 +20,9 @@ public class ClienteFunciones extends AbstractRest {
     private static String FUNCION_CANJE_INFO;
     private static String FUNCION_CANJE;
     private static String FUNCION_REGISTRO_USUARIO;
+    private static String FUNCION_FAVORITAS_ALTA;
+    private static String FUNCION_FAVORITAS_BAJA;
+    private static String FUNCION_FAVORITAS_CONSULTA;
 
     private ClienteFunciones() {
         FUNCION_ALTA = PATH_FUNCIONES + "/alta"; //(POST)
@@ -29,6 +32,9 @@ public class ClienteFunciones extends AbstractRest {
         FUNCION_CANJE_INFO = PATH_FUNCIONES + "/canje/%s"; //(GET)
         FUNCION_CANJE = PATH_FUNCIONES + "/canje"; //(POST)
         FUNCION_REGISTRO_USUARIO = PATH_FUNCIONES + "/registrousuario"; //(POST)
+        FUNCION_FAVORITAS_ALTA = PATH_FUNCIONES + "/favoritas"; //(POST)
+        FUNCION_FAVORITAS_ALTA = PATH_FUNCIONES + "/favoritas"; //(DELETE)
+        FUNCION_FAVORITAS_CONSULTA = PATH_FUNCIONES + "/favoritas/%s"; //(GET)
     }
 
     public static ClienteFunciones getInstance() {
@@ -78,5 +84,18 @@ public class ClienteFunciones extends AbstractRest {
  
     public RespuestaDTO registroUsuarioEnFuncion(RegistroUsurioEnFuncionRequestDTO entidad) {
         return (RespuestaDTO) postEntity(FUNCION_REGISTRO_USUARIO, entidad, RespuestaDTO.class);
+    }
+    
+    public RespuestaDTO altaFuncionFavorita(RegistroUsurioEnFuncionRequestDTO entidad) {
+        return (RespuestaDTO) postEntity(FUNCION_FAVORITAS_ALTA, entidad, RespuestaDTO.class);
+    }
+    
+    public RespuestaDTO bajaFuncionFavorita(RegistroUsurioEnFuncionRequestDTO entidad) {
+        return (RespuestaDTO) postEntity(FUNCION_FAVORITAS_BAJA, entidad, RespuestaDTO.class);
+    }
+    
+    public List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario) {
+        String path = String.format(FUNCION_FAVORITAS_CONSULTA, idUsuario);
+        return getEntities(path, TIPO_LISTA_FUNCIONES);
     }
 }
