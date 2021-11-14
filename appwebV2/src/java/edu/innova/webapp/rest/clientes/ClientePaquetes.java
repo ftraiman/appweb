@@ -94,6 +94,6 @@ public class ClientePaquetes extends AbstractRest {
 
     public List<PaqueteDTO> getPaquetesConLaFuncion(Long idUsuario, Long idFuncion) {
         String path = String.format(PAQUETE_CON_LA_FUNCION, idUsuario, idFuncion);
-        return getEntities(PAQUETE_CON_LA_FUNCION, TIPO_LISTA_PAQUETES);
+        return getEntities(path, TIPO_LISTA_PAQUETES);
     }
 }

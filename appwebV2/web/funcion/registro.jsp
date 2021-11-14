@@ -1,10 +1,10 @@
+<%@page import="edu.innova.webapp.dtos.InformacionCanjeTresPorUnoDTO"%>
 <%@page import="java.math.BigDecimal"%>
 <%@page import="edu.innova.webapp.dtos.PaqueteDTO"%>
 <%@page import="edu.innova.webapp.dtos.InformacionCanjePaqueteDTO"%>
 <%@page import="edu.innova.webapp.dtos.FuncionDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
-<%@page import="edu.innova.webapp.dtos.InformacionCanjeTresPorUno"%>
 <%@page import="edu.innova.webapp.dtos.EspectaculoDTO"%>
 <%@page import="edu.innova.webapp.servlets.ServletRegistroEnFuncion"%>
 <%@page import="edu.innova.webapp.servlets.ServletFuncion"%>
@@ -31,7 +31,7 @@
     EspectaculoDTO espectaculo = infoFuncion.getEspectaculo();
     Long idEspectaculo = espectaculo.getId();
 
-    InformacionCanjeTresPorUno ictpu = ServletFuncion.getInfoCanjeTresPorUno(idUsuario);
+    InformacionCanjeTresPorUnoDTO ictpu = ServletFuncion.getInfoCanjeTresPorUno(idUsuario);
     List<FuncionDTO> funcionesParaCanjear = ictpu.getFuncionesCanjeables();
 
     InformacionCanjePaqueteDTO icpdto = ServletFuncion.getInfoCanjePaquete(idUsuario, idFuncion);

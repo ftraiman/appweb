@@ -52,6 +52,8 @@ public class ServletRegistroEnFuncion extends HttpServlet {
             try {
                 BigDecimal costo = infoFuncion.getEspectaculo().getCosto();
                 servicioEspectaculos.registrarUsuarioEnFuncion(idFuncion, idUsuario, new Date(), costo);
+                req.setAttribute(Constantes.MENSAJE, "La Funcion se compro correctamente");
+                req.getRequestDispatcher("usuario/miperfil.jsp").forward(req, resp);
             } catch (Exception e) {
                 req.setAttribute(Constantes.ERROR, "Debes de seleccionar 3 funciones para canjear");
                 req.getRequestDispatcher("funcion/registro.jsp").forward(req, resp);

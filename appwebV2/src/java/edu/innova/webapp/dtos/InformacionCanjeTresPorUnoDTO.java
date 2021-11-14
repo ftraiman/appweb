@@ -22,5 +22,5 @@ public class InformacionCanjeTresPorUnoDTO {
     public void setFuncionesCanjeables(List<FuncionDTO> funcionesCanjeables) {
         this.funcionesCanjeables = funcionesCanjeables;
     }
-    
+
 }

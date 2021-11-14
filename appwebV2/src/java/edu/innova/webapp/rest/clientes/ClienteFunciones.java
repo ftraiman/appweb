@@ -19,6 +19,7 @@ public class ClienteFunciones extends AbstractRest {
     private static String FUNCION_ESTA_COMPLETA;
     private static String FUNCION_CANJE_INFO;
     private static String FUNCION_CANJE;
+    private static String FUNCION_REGISTRO_USUARIO;
 
     private ClienteFunciones() {
         FUNCION_ALTA = PATH_FUNCIONES + "/alta"; //(POST)
@@ -27,6 +28,7 @@ public class ClienteFunciones extends AbstractRest {
         FUNCION_ESTA_COMPLETA = PATH_FUNCIONES + "/completa/%s"; //(GET)
         FUNCION_CANJE_INFO = PATH_FUNCIONES + "/canje/%s"; //(GET)
         FUNCION_CANJE = PATH_FUNCIONES + "/canje"; //(POST)
+        FUNCION_REGISTRO_USUARIO = PATH_FUNCIONES + "/registrousuario"; //(POST)
     }
 
     public static ClienteFunciones getInstance() {
@@ -52,8 +54,7 @@ public class ClienteFunciones extends AbstractRest {
     
     public RespuestaDTO registroUsuarioEnFuncion(Long idFuncion, Long idUsuario, Date fechaRegistro, BigDecimal costo) {
         RegistroUsurioEnFuncionRequestDTO ruefr = new RegistroUsurioEnFuncionRequestDTO(idFuncion, idUsuario, fechaRegistro, costo);
-        String path = String.format(FUNCION_USUARIO_REGISTRADO, idFuncion, idUsuario);
-        return (RespuestaDTO) postEntity(path, ruefr, RespuestaDTO.class);
+        return (RespuestaDTO) postEntity(FUNCION_REGISTRO_USUARIO, ruefr, RespuestaDTO.class);
     }
     
     public RespuestaDTO isFuncionCompleta(Long idFuncion) {
@@ -75,4 +76,7 @@ public class ClienteFunciones extends AbstractRest {
         return (RespuestaDTO) postEntity(FUNCION_CANJE, canjeTresPorUno, RespuestaDTO.class);
     }
  
+    public RespuestaDTO registroUsuarioEnFuncion(RegistroUsurioEnFuncionRequestDTO entidad) {
+        return (RespuestaDTO) postEntity(FUNCION_REGISTRO_USUARIO, entidad, RespuestaDTO.class);
+    }
 }

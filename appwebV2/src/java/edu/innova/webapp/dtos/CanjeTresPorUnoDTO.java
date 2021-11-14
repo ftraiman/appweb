@@ -76,4 +76,9 @@ public class CanjeTresPorUnoDTO {
     public void setIdEspectaculoDeFuncion(Long idEspectaculoDeFuncion) {
         this.idEspectaculoDeFuncion = idEspectaculoDeFuncion;
     }
+
+    public void setFuncionesCanjeadas(String funcionesCanjeadas) {
+        this.funcionesCanjeadas = funcionesCanjeadas;
+    }
+    
 }
