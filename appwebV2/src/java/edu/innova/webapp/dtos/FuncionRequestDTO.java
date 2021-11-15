@@ -3,17 +3,18 @@ package edu.innova.webapp.dtos;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RegistroUsurioEnFuncionRequestDTO {
+public class FuncionRequestDTO {
     
+    private String operacionFavorita;
     private Long idFuncion;
     private Long idUsuario;
     private Date fechaRegistro;
     private BigDecimal costo;
 
-    public RegistroUsurioEnFuncionRequestDTO() {
+    public FuncionRequestDTO() {
     }
 
-    public RegistroUsurioEnFuncionRequestDTO(Long idFuncion, Long idUsuario, Date fechaRegistro, BigDecimal costo) {
+    public FuncionRequestDTO(Long idFuncion, Long idUsuario, Date fechaRegistro, BigDecimal costo) {
         this.idFuncion = idFuncion;
         this.idUsuario = idUsuario;
         this.fechaRegistro = fechaRegistro;
@@ -51,6 +52,12 @@ public class RegistroUsurioEnFuncionRequestDTO {
     public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
-    
-    
+
+    public String getOperacionFavorita() {
+        return operacionFavorita;
+    }
+
+    public void setOperacionFavorita(String operacionFavorita) {
+        this.operacionFavorita = operacionFavorita;
+    }
 }

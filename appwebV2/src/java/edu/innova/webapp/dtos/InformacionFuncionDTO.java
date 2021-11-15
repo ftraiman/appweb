@@ -8,6 +8,7 @@ public class InformacionFuncionDTO {
     private Boolean isUsuarioRegistradoEnFuncion;
     private Boolean isUsuarioLogueado;
     private Boolean isFuncionCompleta;
+    private Boolean isFuncionFavorita;
     
     public FuncionDTO getFuncion() {
         return funcion;
@@ -56,4 +57,13 @@ public class InformacionFuncionDTO {
     public void setIsFuncionCompleta(Boolean isFuncionCompleta) {
         this.isFuncionCompleta = isFuncionCompleta;
     }
+
+    public Boolean getIsFuncionFavorita() {
+        return isFuncionFavorita;
+    }
+
+    public void setIsFuncionFavorita(Boolean isFuncionFavorita) {
+        this.isFuncionFavorita = isFuncionFavorita;
+    }
+    
 }

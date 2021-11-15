@@ -7,6 +7,7 @@ import edu.innova.webapp.dtos.InformacionCanjeTresPorUnoDTO;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
+import uy.innova.ws.dtos.EspectaculosRequest;
 
 public interface ServicioEspectaculos {
 
@@ -33,5 +34,21 @@ public interface ServicioEspectaculos {
     void canjeTresPorUno(CanjeTresPorUnoDTO ctpudto);
     
     List<EspectaculoDTO> getTodosLosEspectaculosAceptados();
+    
+    void altaFuncionFavorita(Long idFuncion, Long idUsuario);
+   
+    void bajaFuncionFavorita(Long idFuncion, Long idUsuario);
+    
+    List<FuncionDTO> getFuncionFavoritasesDeUsuario(Long idUsuario);
+    
+    Boolean isFuncionFavoritaDelUsuario(Long idFuncion, Long idUsuario);
+    
+    void altaEspectaculoFavorito(Long idEspectaculo, Long idUsuario);
+    
+    void bajaEspectaculoFavorito(Long idEspectaculo, Long idUsuario);
+   
+    public List<EspectaculoDTO> getEspectaculosFavoritosDeUsuario(Long idUsuario);
+
+    public Boolean isEspectaculoFavoritaDelUsuario(Long idEspectaculo, Long idUsuario);
 
 }

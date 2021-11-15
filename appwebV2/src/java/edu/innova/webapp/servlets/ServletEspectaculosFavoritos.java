@@ -7,7 +7,6 @@ import edu.innova.webapp.dtos.InformacionCanjeTresPorUnoDTO;
 import edu.innova.webapp.dtos.InformacionFuncionDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.helpers.Constantes;
-import edu.innova.webapp.helpers.HelperFechas;
 import edu.innova.webapp.helpers.HelperImagenes;
 import edu.innova.webapp.logica.servicios.ServicioEspectaculos;
 import edu.innova.webapp.logica.servicios.ServicioPaquetes;
@@ -16,11 +15,8 @@ import edu.innova.webapp.logica.servicios.impl.ServicioEspectaculosAppSwingImpl;
 import edu.innova.webapp.logica.servicios.impl.ServicioPaquetesAppSwingImpl;
 import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -28,11 +24,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
-@WebServlet(name = "funcion", urlPatterns = {"/funcion"})
+@WebServlet(name = "espectaculosfavoritos", urlPatterns = {"/espectaculosfavoritos"})
 @MultipartConfig
-public class ServletFuncion extends HttpServlet {
+public class ServletEspectaculosFavoritos extends HttpServlet {
 
     private final static HelperImagenes helperImagenes = HelperImagenes.getInstance();
     private final static ServicioUsuarios servicioUsuarios = ServicioUsuariosAppSwingImpl.getInstance();
@@ -45,47 +40,26 @@ public class ServletFuncion extends HttpServlet {
         HttpSession session = req.getSession();
         UsuarioDTO usuarioLogueado = (UsuarioDTO) session.getAttribute(Constantes.USUARIO);
 
-        Long idEspectaculo = Long.valueOf(req.getParameter(Constantes.ID_ESPECTACULO));
-        String nombre = req.getParameter(Constantes.NOMBRE);
-        String fecha = req.getParameter(Constantes.FECHA);
-        Date fechaInicio = HelperFechas.stringToDate(fecha, "yyyy-MM-dd'T'HH:mm");
-
-        String[] invitados = req.getParameterValues(Constantes.INVITADOS);
-        List<UsuarioDTO> usuariosInvitados = Stream.of(invitados)
-                .map(num -> Long.valueOf(num))
-                .map(id -> {
-                    UsuarioDTO usuario = new UsuarioDTO();
-                    usuario.setId(id);
-                    return usuario;
-                })
-                .collect(Collectors.toList());
-
-        if (usuariosInvitados.stream().anyMatch(usuario -> usuario.getId() == 0)) {
-            usuariosInvitados = new ArrayList<>();
-        }
-
-        String imagen = null;
-
-        if (req.getPart("imagen") != null) {
-            Part part = req.getPart("imagen");
-            imagen = helperImagenes.crearNombreArchivo(part, nombre);
-            if (null != imagen) {
-                if (!helperImagenes.guardarImagen(part, HelperImagenes.CarpetaDestinoImagenes.FUNCIONES, imagen)) {
-                    imagen = null;
-                }
-            }
-        }
-
-        FuncionDTO nuevaFuncion = new FuncionDTO(nombre, idEspectaculo, fechaInicio, new Date(), usuariosInvitados, imagen);
+        String operacion = req.getParameter("operacion");
+        Long idEspectaculo = Long.valueOf(req.getParameter("idEspectaculo"));
+        Long idUsuario = usuarioLogueado.getId();
 
         try {
-            servicioEspectaculos.altaFuncion(nuevaFuncion);
+            if ("alta".equalsIgnoreCase(operacion)) {
+                servicioEspectaculos.altaEspectaculoFavorito(idEspectaculo, idUsuario);
+                req.setAttribute(Constantes.MENSAJE, "Se agrego correctamente el Espectaculo como favorito");
+            } else if ("baja".equalsIgnoreCase(operacion)) {
+                servicioEspectaculos.bajaEspectaculoFavorito(idEspectaculo, idUsuario);
+                req.setAttribute(Constantes.MENSAJE, "La Espectaculo dejo de ser favorito");
+            }
             req.getRequestDispatcher(String.format("espectaculo/detalle.jsp?idEspectaculo=%s", idEspectaculo)).forward(req, resp);
         } catch (Exception e) {
             req.setAttribute("error", e.getMessage());
-            req.getRequestDispatcher("funcion/alta.jsp").forward(req, resp);
+            req.getRequestDispatcher("funcion/detalle.jsp").forward(req, resp);
             return;
         }
+
+        
     }
 
     @Override
@@ -116,13 +90,9 @@ public class ServletFuncion extends HttpServlet {
         Boolean isFuncionCompleta = servicioEspectaculos.isFuncionCompleta(idFuncion);
         Boolean isUsuarioLogueado = usuarioLogueado != null;
         Boolean usuarioRegistradoEnFuncion = false;
-        Boolean isFuncionFavorita = false;
 
-        if (isUsuarioLogueado) {
-            if (!isFuncionCompleta) {
-                usuarioRegistradoEnFuncion = servicioEspectaculos.isUsuarioRegistradoEnFuncion(idFuncion, usuarioLogueado.getId());
-            }
-            isFuncionFavorita = servicioEspectaculos.isFuncionFavoritaDelUsuario(idFuncion, usuarioLogueado.getId());
+        if (isUsuarioLogueado && !isFuncionCompleta) {
+            usuarioRegistradoEnFuncion = servicioEspectaculos.isUsuarioRegistradoEnFuncion(idFuncion, usuarioLogueado.getId());
         }
 
         informacionFuncion.setFuncion(funcion);
@@ -131,7 +101,7 @@ public class ServletFuncion extends HttpServlet {
         informacionFuncion.setIsUsuarioLogueado(usuarioLogueado != null);
         informacionFuncion.setIsUsuarioRegistradoEnFuncion(usuarioRegistradoEnFuncion);
         informacionFuncion.setIsFuncionCompleta(isFuncionCompleta);
-        informacionFuncion.setIsFuncionFavorita(isFuncionFavorita);
+
         return informacionFuncion;
     }
 

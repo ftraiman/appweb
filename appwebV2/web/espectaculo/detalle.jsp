@@ -21,6 +21,14 @@
     } else {
         idEspectaculo = Long.valueOf(request.getParameter(Constantes.ID_ESPECTACULO));
     }
+    UsuarioDTO u = (UsuarioDTO) request.getSession().getAttribute("usuario");
+    Boolean isUsuarioLogueado = false;
+    Boolean isEspectaculoFavorito = false;
+    if (u != null) {
+        isUsuarioLogueado = true;
+        isEspectaculoFavorito = ServletAltaEspectaculo.isExpectaculoFavorito(idEspectaculo, u.getId());
+    }
+    
     InformacionEspectaculoDTO infoEspectaculo = ServletAltaEspectaculo.getEspectaculoPorId(idEspectaculo);
 
     EspectaculoDTO espectaculo = infoEspectaculo.getEspectaculo();
@@ -64,6 +72,29 @@
             <%@include file="../common/header.jsp" %>
             <!-- End Navbar -->
             <div class="container-fluid py-4">
+                <% if (isUsuarioLogueado) {%>
+                        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-1">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+                                    <li class="nav-item">
+                                        <%if (isEspectaculoFavorito) {%>
+                                        <form id="form-baja" role="form" method="POST" action="/webV2/espectaculosfavoritos">
+                                            <input type="hidden" name="operacion" value="baja" />
+                                            <input type="hidden" name="idEspectaculo" value="<%=idEspectaculo%>" />
+                                            <input type="submit" class="btn btn-light" value="Quitar de mis favoritos">
+                                        </form>
+                                        <% } else { %>
+                                        <form id="form-alta" role="form" method="POST" action="/webV2/espectaculosfavoritos">
+                                            <input type="hidden" name="operacion" value="alta" />
+                                            <input type="hidden" name="idEspectaculo" value="<%=idEspectaculo%>" />
+                                            <input type="submit" class="btn btn-light" value="Agregar a mis favoritos"/>
+                                        </form>
+                                        <% } %>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>     
+                        <% } %>
                 <div class="col-12 mt-4">
                     <div class="card mb-4">
                         <div class="card-header pb-0 p-3">

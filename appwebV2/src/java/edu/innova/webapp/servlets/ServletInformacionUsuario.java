@@ -82,5 +82,8 @@ public class ServletInformacionUsuario extends HttpServlet {
                 .filter(espectaculo -> Constantes.ESPECTACULOS_RECHAZADOS.equalsIgnoreCase(espectaculo.getEstado())).collect(Collectors.toList()));
         return espectaculosDeUsuario;
     }
-
+    
+    public static List<EspectaculoDTO> getEspectaculosFavoritosDelUsuario(Long idUsuario) {
+        return servicioEspectaculos.getEspectaculosFavoritosDeUsuario(idUsuario);
+    }
 }

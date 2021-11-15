@@ -2,6 +2,7 @@ package edu.innova.webapp.servlets;
 
 import edu.innova.webapp.dtos.CategoriaDTO;
 import edu.innova.webapp.dtos.EspectaculoDTO;
+import edu.innova.webapp.dtos.FuncionDTO;
 import edu.innova.webapp.dtos.InformacionEspectaculoDTO;
 import edu.innova.webapp.dtos.InformacionPaqueteDTO;
 import edu.innova.webapp.dtos.PaqueteDTO;
@@ -202,5 +203,9 @@ public class ServletPaquete extends HttpServlet {
 
     public static List<PaqueteDTO> getTodosLosPaquetes() {
         return servicioPaquetes.getTodosLosPaquetes();
+    }
+    
+    public static List<FuncionDTO> getFuncionesFavoritasDeUsuario(Long idUsuario) {
+        return servicioEspectaculos.getFuncionFavoritasesDeUsuario(idUsuario);
     }
 }

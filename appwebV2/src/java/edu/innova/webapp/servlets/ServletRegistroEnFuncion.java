@@ -15,7 +15,6 @@ import edu.innova.webapp.logica.servicios.impl.ServicioUsuariosAppSwingImpl;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.servlet.ServletException;

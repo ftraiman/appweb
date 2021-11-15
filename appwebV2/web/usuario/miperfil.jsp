@@ -1,3 +1,4 @@
+<%@page import="edu.innova.webapp.dtos.FuncionDTO"%>
 <%@page import="edu.innova.webapp.dtos.PaqueteDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="edu.innova.webapp.servlets.ServletPaquete"%>
@@ -25,6 +26,9 @@
     EspectaculosDeUsuario espectaculosDeUsuario = ServletInformacionUsuario.getEspectaculosDeUsuarioPorIdArtista(u.getId());
     List<PaqueteDTO> paquetesCreadosPorArtista = Constantes.ARTISTA.equalsIgnoreCase(tipoUsuario) ? ServletPaquete.getPaquetesPorIdUsuario(u.getId()) : new ArrayList<PaqueteDTO>();
     List<PaqueteDTO> paquetesCompradosPorUsuario = ServletPaquete.getPaquetesCompradosPorIdUsuario(u.getId());
+    List<FuncionDTO> funcionesFavoritas = ServletPaquete.getFuncionesFavoritasDeUsuario(u.getId());
+
+    List<EspectaculoDTO> espectaculosFavoritos = ServletInformacionUsuario.getEspectaculosFavoritosDelUsuario(u.getId());
 
 %>
 <!DOCTYPE html>
@@ -59,15 +63,15 @@
             <%@include file="../common/header.jsp" %>
             <!-- End Navbar -->
             <%  if (request.getAttribute(Constantes.ERROR) != null) {%>
-                    <div class="alert alert-warning" role="alert">
-                        <%= request.getAttribute(Constantes.ERROR)%>
-                    </div>
-                    <%  } %>
-                    <%  if (request.getAttribute(Constantes.MENSAJE) != null) {%>
-                    <div class="alert alert-success" role="alert">
-                        <%= request.getAttribute(Constantes.MENSAJE)%>
-                    </div>
-                    <%  } %>
+            <div class="alert alert-warning" role="alert">
+                <%= request.getAttribute(Constantes.ERROR)%>
+            </div>
+            <%  } %>
+            <%  if (request.getAttribute(Constantes.MENSAJE) != null) {%>
+            <div class="alert alert-success" role="alert">
+                <%= request.getAttribute(Constantes.MENSAJE)%>
+            </div>
+            <%  }%>
             <div class="container-fluid py-4">
                 <div class="row mt-4">
                     <div class="col-lg-7 mb-lg-0 mb-4">
@@ -324,6 +328,65 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <!--Bloque Favoritos-->
+            <div class="container-fluid py-4">
+                <div class="row">
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Mis Funciones favoritas</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (funcionesFavoritas.size() > 0) {
+                                            for (FuncionDTO i : funcionesFavoritas) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/webV2/imagenes?carpeta=funciones&archivo=<%=i.getImagen()%>" alt="<%=i.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=i.getNombre()%></h6>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/funcion/detalle.jsp?idFuncion=<%=i.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                                        <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Mis Espectaculos favoritas</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (espectaculosFavoritos.size() > 0) {
+                                            for (EspectaculoDTO i : espectaculosFavoritos) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/webV2/imagenes?carpeta=espectaculos&archivo=<%=i.getImagen()%>" alt="<%=i.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=i.getNombre()%></h6>
+                                        </div>
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=i.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
             <%@include file="../common/footer.jsp" %>
         </main>

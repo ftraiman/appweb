@@ -142,4 +142,8 @@ public class ServletAltaEspectaculo extends HttpServlet {
         
         return servicioEspectaculos.getEspectaculosPorCategoriaPlataforma(idPlataforma, idCategoria);
     }
+    
+    public static Boolean isExpectaculoFavorito(Long idEspectaculo, Long idUsuario) {
+        return servicioEspectaculos.isEspectaculoFavoritaDelUsuario(idEspectaculo, idUsuario);
+    }
 }

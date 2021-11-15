@@ -3,7 +3,7 @@ package edu.innova.webapp.rest.clientes;
 import edu.innova.webapp.dtos.CanjeTresPorUnoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
 import edu.innova.webapp.dtos.InformacionCanjeTresPorUnoDTO;
-import edu.innova.webapp.dtos.RegistroUsurioEnFuncionRequestDTO;
+import edu.innova.webapp.dtos.FuncionRequestDTO;
 import edu.innova.webapp.dtos.RespuestaDTO;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class ClienteFunciones extends AbstractRest {
         FUNCION_CANJE = PATH_FUNCIONES + "/canje"; //(POST)
         FUNCION_REGISTRO_USUARIO = PATH_FUNCIONES + "/registrousuario"; //(POST)
         FUNCION_FAVORITAS_ALTA = PATH_FUNCIONES + "/favoritas"; //(POST)
-        FUNCION_FAVORITAS_ALTA = PATH_FUNCIONES + "/favoritas"; //(DELETE)
+        FUNCION_FAVORITAS_BAJA = PATH_FUNCIONES + "/favoritas"; //(DELETE)
         FUNCION_FAVORITAS_CONSULTA = PATH_FUNCIONES + "/favoritas/%s"; //(GET)
     }
 
@@ -59,7 +59,7 @@ public class ClienteFunciones extends AbstractRest {
     }
     
     public RespuestaDTO registroUsuarioEnFuncion(Long idFuncion, Long idUsuario, Date fechaRegistro, BigDecimal costo) {
-        RegistroUsurioEnFuncionRequestDTO ruefr = new RegistroUsurioEnFuncionRequestDTO(idFuncion, idUsuario, fechaRegistro, costo);
+        FuncionRequestDTO ruefr = new FuncionRequestDTO(idFuncion, idUsuario, fechaRegistro, costo);
         return (RespuestaDTO) postEntity(FUNCION_REGISTRO_USUARIO, ruefr, RespuestaDTO.class);
     }
     
@@ -82,15 +82,15 @@ public class ClienteFunciones extends AbstractRest {
         return (RespuestaDTO) postEntity(FUNCION_CANJE, canjeTresPorUno, RespuestaDTO.class);
     }
  
-    public RespuestaDTO registroUsuarioEnFuncion(RegistroUsurioEnFuncionRequestDTO entidad) {
+    public RespuestaDTO registroUsuarioEnFuncion(FuncionRequestDTO entidad) {
         return (RespuestaDTO) postEntity(FUNCION_REGISTRO_USUARIO, entidad, RespuestaDTO.class);
     }
     
-    public RespuestaDTO altaFuncionFavorita(RegistroUsurioEnFuncionRequestDTO entidad) {
+    public RespuestaDTO altaFuncionFavorita(FuncionRequestDTO entidad) {
         return (RespuestaDTO) postEntity(FUNCION_FAVORITAS_ALTA, entidad, RespuestaDTO.class);
     }
     
-    public RespuestaDTO bajaFuncionFavorita(RegistroUsurioEnFuncionRequestDTO entidad) {
+    public RespuestaDTO bajaFuncionFavorita(FuncionRequestDTO entidad) {
         return (RespuestaDTO) postEntity(FUNCION_FAVORITAS_BAJA, entidad, RespuestaDTO.class);
     }
     

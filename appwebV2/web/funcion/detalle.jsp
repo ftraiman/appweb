@@ -24,6 +24,8 @@
     Boolean isUsuarioLogueado = infoFuncion.getIsUsuarioLogueado();
     Boolean isUsuarioRegistradoEnFuncion = infoFuncion.getIsUsuarioRegistradoEnFuncion();
     Boolean isFuncionCompleta = infoFuncion.getIsFuncionCompleta();
+    Boolean isFuncionFavorita = infoFuncion.getIsFuncionFavorita();
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,6 +61,16 @@
 
             <div class="container-fluid py-4">
                 <div class="col-12 mt-4">
+                    <%  if (request.getAttribute(Constantes.ERROR) != null) {%>
+                    <div class="alert alert-warning" role="alert">
+                        <%= request.getAttribute(Constantes.ERROR)%>
+                    </div>
+                    <%  } %>
+                    <%  if (request.getAttribute(Constantes.MENSAJE) != null) {%>
+                    <div class="alert alert-success" role="alert">
+                        <%= request.getAttribute(Constantes.MENSAJE)%>
+                    </div>
+                    <%  }%>
                     <div class="card mb-4">
                         <div class="card-header pb-0 p-3">
                             <h6 class="mb-1">Función: <%=funcion.getNombre()%></h6>
@@ -90,6 +102,27 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-1">
+                            <div class="nav-wrapper position-relative end-0">
+                                <ul class="nav nav-pills nav-fill p-1 bg-transparent" role="tablist">
+                                    <li class="nav-item">
+                                        <%if (isFuncionFavorita) {%>
+                                        <form id="form-baja" role="form" method="POST" action="/webV2/favoritas">
+                                            <input type="hidden" name="operacion" value="baja" />
+                                            <input type="hidden" name="idFuncion" value="<%=idFuncion%>" />
+                                            <input type="submit" class="nav-link mb-0 px-0 py-1 active " value="Quitar de mis favoritos">
+                                        </form>
+                                        <% } else { %>
+                                        <form id="form-alta" role="form" method="POST" action="/webV2/favoritas">
+                                            <input type="hidden" name="operacion" value="alta" />
+                                            <input type="hidden" name="idFuncion" value="<%=idFuncion%>" />
+                                            <input type="submit" class="nav-link mb-0 px-0 py-1 active " value="Agregar a mis favoritos"/>
+                                        </form>
+                                        <% } %>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>     
                         <% } %>
                         <div class="card-body p-3">
                             <h4>Artistas invitados</h4>

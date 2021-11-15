@@ -99,6 +99,22 @@ abstract class AbstractRest<T> {
         }
     }
     
+    public <T> T deleteEntity(String path, T contenido, Class<T> claseRespuesta) {
+        try {
+            Response respuesta = client.target(path)
+                    .request(MediaType.APPLICATION_JSON)
+                    .method("delete", Entity.json(contenido));
+            if (respuesta.getStatus() == 400) {
+                RespuestaDTO e = respuesta.readEntity(RespuestaDTO.class);
+                throw new InnovaModelException(e.getMensaje());
+            }
+            return respuesta.readEntity(claseRespuesta);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new InnovaModelException(e.getMessage());
+        }
+    }
+    
     public <T> List<T> getEntities(String path, GenericType<List<T>> genericType) {
         try {
             Response respuesta = client.target(path)
