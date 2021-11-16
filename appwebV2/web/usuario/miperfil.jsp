@@ -183,7 +183,7 @@
             <% if (Constantes.ARTISTA.equalsIgnoreCase(tipoUsuario)) { %>
             <div class="container-fluid py-4">
                 <div class="row">
-                    <div class="col-12 col-xl-4">
+                    <div class="col-12 col-xl-3">
                         <div class="card h-100">
                             <div class="card-header pb-0 p-3">
                                 <h6 class="mb-0" style="background-color: wheat">Espectaculos Ingresados</h6>
@@ -228,8 +228,9 @@
                                             <h6 class="mb-0 text-sm"><%=e.getNombre()%></h6>
                                             <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
                                         </div>
-                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
-                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/funcion/alta.jsp?idEspectaculo=<%=e.getId()%>">Agregar Función</a>
+                                        <a class="btn btn-link" style="padding-left: 1px !important" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
+                                        <a class="btn btn-link" style="padding-left: 1px !important" href="/webV2/funcion/alta.jsp?idEspectaculo=<%=e.getId()%>">Agregar Función</a>
+                                        <a class="btn btn-link" style="padding-left: 1px !important" href="/webV2/finalizarespectaculo?idEspectaculo=<%=e.getId()%>">Finalizar</a>
                                     </li>
                                     <% }
                                         }%>
@@ -237,7 +238,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 col-xl-4">
+                    <div class="col-12 col-xl-3">
                         <div class="card h-100">
                             <div class="card-header pb-0 p-3">
                                 <h6 class="mb-0" style="background-color: floralwhite">Espectaculos Rechazados</h6>
@@ -256,6 +257,32 @@
                                             <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
                                         </div>
                                         <!--<a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/modificarusuario?dejardeseguir=<%=e.getId()%>">Dejar de seguir</a>-->
+                                        <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-2">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: floralwhite">Espectaculos Finalizados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <% if (espectaculosDeUsuario.getEspectaculosFinalizados().size() > 0) {
+                                            for (EspectaculoDTO e : espectaculosDeUsuario.getEspectaculosFinalizados()) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3">
+                                            <img src="/webV2/imagenes?carpeta=espectaculos&archivo=<%=e.getImagen()%>" alt="<%=e.getNombre()%>"  class="border-radius-lg shadow" style="width: 50px !important; height: 50px !important">
+                                        </div>
+                                        <div class="d-flex align-items-start flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm"><%=e.getNombre()%></h6>
+                                            <p class="mb-0 text-xs"><%=e.getDescripcion()%> / <%=e.getUrl()%></p>
+                                        </div>                                        
                                         <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/espectaculo/detalle.jsp?idEspectaculo=<%=e.getId()%>">Ver detalles</a>
                                     </li>
                                     <% }
@@ -356,9 +383,8 @@
                                 </ul>
                             </div>
                         </div>
-
                     </div>
-                                        <div class="col-12 col-xl-4">
+                    <div class="col-12 col-xl-4">
                         <div class="card h-100">
                             <div class="card-header pb-0 p-3">
                                 <h6 class="mb-0" style="background-color: wheat">Mis Espectaculos favoritas</h6>

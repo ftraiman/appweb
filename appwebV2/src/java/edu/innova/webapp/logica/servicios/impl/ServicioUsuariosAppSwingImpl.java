@@ -4,12 +4,12 @@ package edu.innova.webapp.logica.servicios.impl;
 //import edu.innova.logica.controladores.UsuarioControlador;
 //import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
 
+import edu.innova.webapp.dtos.SorteoRequestDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 
 import edu.innova.webapp.logica.servicios.ServicioUsuarios;
 import edu.innova.webapp.rest.clientes.ClienteUsuarios;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ServicioUsuariosAppSwingImpl implements ServicioUsuarios {
 
@@ -86,6 +86,26 @@ public class ServicioUsuariosAppSwingImpl implements ServicioUsuarios {
         
 //        usuarioControlador.modificarUsuarioDTO(usuarioDtoMapper(usuario));
     }
+    
+    @Override
+    public List<UsuarioDTO> getUsuariosRegistradosALaFuncion(Long idFuncion) {
+        return clienteUsuarios.getEspectadoresDeFuncionPorUsuario(idFuncion);
+    }
+    
+    @Override
+    public List<UsuarioDTO> getGanadoresDelSorteo(Long idFuncion, Integer premios) {
+        return clienteUsuarios.getGanadoresDelSorteo(idFuncion, premios);
+    }
+    
+//    @Override
+    public void registrarGanadores(Long idFuncion, List<Long> idUsuarios, String premioDeFuncion) {
+        SorteoRequestDTO request = new SorteoRequestDTO(idUsuarios, idFuncion, premioDeFuncion);
+//        private List<Long> idUsuarios;
+//    private Long idFuncion;
+//    private String premio;
+        clienteUsuarios.altaGanadoresSorteo(request);
+    }
+    
 
 //    public static edu.innova.logica.dtos.UsuarioDTO usuarioDtoMapper(UsuarioDTO usuario) {
 //        return new edu.innova.logica.dtos.UsuarioDTO(usuario.getId(), usuario.getTipo(), usuario.getNickname(), usuario.getNombre(), usuario.getApellido(), usuario.getEmail(), usuario.getFechaNacimiento(),

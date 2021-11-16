@@ -13,6 +13,7 @@ public class Constantes {
     public static final String ESPECTACULOS_ACEPTADOS = "aceptado";
     public static final String ESPECTACULOS_RECHAZADOS = "rechazado";
     public static final String ID_ESPECTACULO = "idEspectaculo";
+    public static final String FINALIZADO = "finalizado";
     public static final String NOMBRE = "nombre";
     public static final String FECHA = "fecha";
     public static final String INVITADOS = "invitados";

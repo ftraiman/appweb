@@ -17,4 +17,10 @@ public interface ServicioUsuarios {
     
     void modificarUsuarioDTO(UsuarioDTO usuario);
     
+    List<UsuarioDTO> getUsuariosRegistradosALaFuncion(Long idFuncion);
+    
+    List<UsuarioDTO> getGanadoresDelSorteo(Long idFuncion, Integer premios);
+    
+    void registrarGanadores(Long idFuncion, List<Long> idUsuarios, String premioDeFuncion);
+    
 }

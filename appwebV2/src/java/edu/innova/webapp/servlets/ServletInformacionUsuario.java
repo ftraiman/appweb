@@ -80,6 +80,9 @@ public class ServletInformacionUsuario extends HttpServlet {
                 .filter(espectaculo -> Constantes.ESPECTACULOS_ACEPTADOS.equalsIgnoreCase(espectaculo.getEstado())).collect(Collectors.toList()));
         espectaculosDeUsuario.setEspectaculosRechazados(espectaculos.stream()
                 .filter(espectaculo -> Constantes.ESPECTACULOS_RECHAZADOS.equalsIgnoreCase(espectaculo.getEstado())).collect(Collectors.toList()));
+        espectaculosDeUsuario.setEspectaculosFinalizados(espectaculos.stream()
+                .filter(espectaculo -> Constantes.FINALIZADO.equalsIgnoreCase(espectaculo.getEstado())).collect(Collectors.toList()));
+        
         return espectaculosDeUsuario;
     }
     

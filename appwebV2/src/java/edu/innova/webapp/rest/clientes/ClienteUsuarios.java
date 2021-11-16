@@ -1,9 +1,11 @@
 package edu.innova.webapp.rest.clientes;
 
 import edu.innova.webapp.dtos.RespuestaDTO;
+import edu.innova.webapp.dtos.ResultadosSorteosDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import java.util.Date;
 import java.util.List;
+import edu.innova.webapp.dtos.SorteoRequestDTO;
 
 public class ClienteUsuarios extends AbstractRest {
 
@@ -12,13 +14,21 @@ public class ClienteUsuarios extends AbstractRest {
     private static String USUARIOS_TODOS;
     private static String USUARIOS_LOGIN;
     private static String USUARIOS_MODIFICAR;
-    private static String USUARIOS_ALTA;    
+    private static String USUARIOS_ALTA;
+    private static String USUARIOS_DE_FUNCION;
+    private static String USUARIOS_GANADORES_DE_SORTEO;
+    private static String USUARIOS_REGISTRO_ALTA_GANADORES_DE_SORTEO;
+    private static String USUARIOS_PREMIOS_GANADOS;
 
     private ClienteUsuarios() {
         USUARIOS_ALTA = PATH_USUARIOS + "/alta";
         USUARIOS_TODOS = PATH_USUARIOS + "/todos";
         USUARIOS_LOGIN = PATH_USUARIOS + "/login";
         USUARIOS_MODIFICAR = PATH_USUARIOS + "/modificar";
+        USUARIOS_DE_FUNCION = PATH_USUARIOS + "/funcion/%s";
+        USUARIOS_GANADORES_DE_SORTEO = PATH_USUARIOS + "/sorteo/funcion/%s/premios/%s";
+        USUARIOS_REGISTRO_ALTA_GANADORES_DE_SORTEO = PATH_USUARIOS + "/sorteo/alta";
+        USUARIOS_PREMIOS_GANADOS =  PATH_USUARIOS + "/sorteo/ganador/%s";
     }
 
     public static ClienteUsuarios getInstance() {
@@ -47,6 +57,28 @@ public class ClienteUsuarios extends AbstractRest {
     public RespuestaDTO modificarUsuario(UsuarioDTO usuario) {
         return (RespuestaDTO) postEntity(USUARIOS_MODIFICAR, usuario, RespuestaDTO.class);
     }
+    
+    public List<UsuarioDTO> getEspectadoresDeFuncionPorUsuario(Long idFuncion) {
+        String path = String.format(USUARIOS_DE_FUNCION, idFuncion);
+        return getEntities(path, TIPO_LISTA_USUARIOS);
+    }
+    
+    public List<UsuarioDTO> getGanadoresDelSorteo(Long idFuncion, Integer premios) {
+//        USUARIOS_GANADORES_DE_SORTEO = PATH_USUARIOS + "/sorteo/funcion/%s/premios/%s";
+        String path = String.format(USUARIOS_GANADORES_DE_SORTEO, idFuncion, premios);
+        return getEntities(path, TIPO_LISTA_USUARIOS);
+    }
+    
+    public RespuestaDTO altaGanadoresSorteo(SorteoRequestDTO request) {
+        return (RespuestaDTO) postEntity(USUARIOS_REGISTRO_ALTA_GANADORES_DE_SORTEO, request, RespuestaDTO.class);
+    }
+    
+    public List<ResultadosSorteosDTO> getPremiosEspectadores(String email) {
+//        USUARIOS_PREMIOS_GANADOS =  PATH_USUARIOS + "/sorteo/ganador/%s";
+        String path = String.format(USUARIOS_GANADORES_DE_SORTEO, email);
+        return getEntities(path, TIPO_LISTA_RESULTADO_SORTEO);
+    }
+    
 
 //    public List<UsuarioDTO> getTodosLosUsuarsios() {
 //        try {

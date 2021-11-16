@@ -15,6 +15,9 @@ public class FuncionDTO {
     private Date fechaRegistro;
     private List<UsuarioDTO> artistasInvitados;
     private String imagen;
+    private Boolean sorteo;
+    private String descripcionPremios;
+    private Integer cantidadPremios;
     //============================ ATRIBUTOS =================================//
 
     //============================ CONSTRUCTURES =============================//
@@ -135,6 +138,30 @@ public class FuncionDTO {
             return false;
         }
         return true;
+    }
+
+    public Boolean getSorteo() {
+        return sorteo;
+    }
+
+    public void setSorteo(Boolean sorteo) {
+        this.sorteo = sorteo;
+    }
+
+    public String getDescripcionPremios() {
+        return descripcionPremios;
+    }
+
+    public void setDescripcionPremios(String descripcionPremios) {
+        this.descripcionPremios = descripcionPremios;
+    }
+
+    public Integer getCantidadPremios() {
+        return cantidadPremios;
+    }
+
+    public void setCantidadPremios(Integer cantidadPremios) {
+        this.cantidadPremios = cantidadPremios;
     }
 
 }

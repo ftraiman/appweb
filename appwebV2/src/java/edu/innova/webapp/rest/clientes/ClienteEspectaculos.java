@@ -17,6 +17,7 @@ public class ClienteEspectaculos extends AbstractRest {
     private static String ESPECTACULOS_TODOS;
     private static String ESPECTACULOS_FAVORITOS;
     private static String ESPECTACULOS_FAVORITOS_BUSQUEDA;
+    private static String ESPECTACULOS_FINALIZAR;
 
     private ClienteEspectaculos() {
         ESPECTACULO_ALTA = PATH_ESPECTACULOS + "/alta"; //(POST)
@@ -26,6 +27,7 @@ public class ClienteEspectaculos extends AbstractRest {
         ESPECTACULOS_TODOS = PATH_ESPECTACULOS + "/todos"; //(GET)
         ESPECTACULOS_FAVORITOS = PATH_ESPECTACULOS + "/favoritos"; //(POST)
         ESPECTACULOS_FAVORITOS_BUSQUEDA = PATH_ESPECTACULOS + "/favoritos/%s";
+        ESPECTACULOS_FINALIZAR = PATH_ESPECTACULOS + "/finalizar";
     }
 
     public static ClienteEspectaculos getInstance() {
@@ -69,5 +71,9 @@ public class ClienteEspectaculos extends AbstractRest {
     public List<EspectaculoDTO> getEspectaculosFavoritosPorUsuario(Long idUsuario) {
         String path = String.format(ESPECTACULOS_FAVORITOS_BUSQUEDA, idUsuario);
         return getEntities(path, TIPO_LISTA_ESPECTACULOS);
+    }
+    
+    public RespuestaDTO finalizar(EspectaculosRequest request) {
+        return (RespuestaDTO) postEntity(ESPECTACULOS_FINALIZAR, request, RespuestaDTO.class);
     }
 }

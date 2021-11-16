@@ -263,5 +263,12 @@ public class ServicioEspectaculosAppSwingImpl implements ServicioEspectaculos {
         List<EspectaculoDTO> espectaculosDelUsuario = clienteEspectaculos.getEspectaculosFavoritosPorUsuario(idUsuario);
         return espectaculosDelUsuario.stream().anyMatch(e -> e.getId() == idEspectaculo);
     }
+    
+    @Override
+    public void finalizarEspectaculo(Long idEspectaculo) {
+        EspectaculosRequest request = new EspectaculosRequest();
+        request.setIdEspectaculo(idEspectaculo);
+        clienteEspectaculos.finalizar(request);
+    }
 
 }

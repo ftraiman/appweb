@@ -51,4 +51,5 @@ public interface ServicioEspectaculos {
 
     public Boolean isEspectaculoFavoritaDelUsuario(Long idEspectaculo, Long idUsuario);
 
+    void finalizarEspectaculo(Long idEspectaculo);
 }

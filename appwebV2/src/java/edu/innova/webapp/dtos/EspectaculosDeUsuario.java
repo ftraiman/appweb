@@ -8,6 +8,7 @@ public class EspectaculosDeUsuario {
     private List<EspectaculoDTO> espectaculosIngresados = new ArrayList<>();
     private List<EspectaculoDTO> espectaculosAceptados = new ArrayList<>();
     private List<EspectaculoDTO> espectaculosRechazados = new ArrayList<>();
+    private List<EspectaculoDTO> espectaculosFinalizados = new ArrayList<>();
 
     public List<EspectaculoDTO> getEspectaculosIngresados() {
         return espectaculosIngresados;
@@ -32,6 +33,13 @@ public class EspectaculosDeUsuario {
     public void setEspectaculosRechazados(List<EspectaculoDTO> espectaculosRechazados) {
         this.espectaculosRechazados = espectaculosRechazados;
     }
-    
-    
+
+    public List<EspectaculoDTO> getEspectaculosFinalizados() {
+        return espectaculosFinalizados;
+    }
+
+    public void setEspectaculosFinalizados(List<EspectaculoDTO> espectaculosFinalizados) {
+        this.espectaculosFinalizados = espectaculosFinalizados;
+    }
+
 }

@@ -151,6 +151,7 @@
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha de la Función</th>
                                                 <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Artistas invitados</th>
                                                 <th class="text-secondary opacity-7"></th>
+                                                <th class="text-secondary opacity-7"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -177,6 +178,11 @@
                                                 <td class="align-middle">
                                                     <a href="/webV2/funcion/detalle.jsp?idFuncion=<%=funcion.getId()%>" class="text-dark font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
                                                         Más información
+                                                    </a>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a href="/webV2/funcion/sorteo.jsp?idFuncion=<%=funcion.getId()%>" class="text-dark font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
+                                                        Realizar sorteo
                                                     </a>
                                                 </td>
                                             </tr>

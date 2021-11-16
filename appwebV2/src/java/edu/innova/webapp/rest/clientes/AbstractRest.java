@@ -6,6 +6,7 @@ import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.FuncionDTO;
 import edu.innova.webapp.dtos.PlataformaDTO;
 import edu.innova.webapp.dtos.RespuestaDTO;
+import edu.innova.webapp.dtos.ResultadosSorteosDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.exceptions.InnovaModelException;
 import edu.innova.webapp.helpers.HelperProperties;
@@ -35,6 +36,8 @@ abstract class AbstractRest<T> {
     protected static final GenericType<List<UsuarioDTO>> TIPO_LISTA_USUARIOS = new GenericType<List<UsuarioDTO>>() {};
     protected static final GenericType<List<FuncionDTO>> TIPO_LISTA_FUNCIONES = new GenericType<List<FuncionDTO>>() {};
     protected static final GenericType<List<EspectaculoDTO>> TIPO_LISTA_ESPECTACULOS = new GenericType<List<EspectaculoDTO>>() {};
+    protected static final GenericType<List<ResultadosSorteosDTO>> TIPO_LISTA_RESULTADO_SORTEO = new GenericType<List<ResultadosSorteosDTO>>() {};
+   
     
     public AbstractRest() {
         this.client = ClientBuilder.newClient();
