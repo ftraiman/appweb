@@ -2,6 +2,7 @@ package edu.innova.webapp.servlets;
 
 import edu.innova.webapp.dtos.EspectaculoDTO;
 import edu.innova.webapp.dtos.EspectaculosDeUsuario;
+import edu.innova.webapp.dtos.ResultadosSorteosDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import edu.innova.webapp.helpers.Constantes;
 import edu.innova.webapp.helpers.HelperImagenes;
@@ -88,5 +89,9 @@ public class ServletInformacionUsuario extends HttpServlet {
     
     public static List<EspectaculoDTO> getEspectaculosFavoritosDelUsuario(Long idUsuario) {
         return servicioEspectaculos.getEspectaculosFavoritosDeUsuario(idUsuario);
+    }
+    
+    public static List<ResultadosSorteosDTO> getSorteosGanados(String email) {
+        return servicioUsuarios.getSorteosGanados(email);
     }
 }

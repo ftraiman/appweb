@@ -4,6 +4,7 @@ package edu.innova.webapp.logica.servicios.impl;
 //import edu.innova.logica.controladores.UsuarioControlador;
 //import edu.innova.logica.controladores.impl.UsuarioControladorImpl;
 
+import edu.innova.webapp.dtos.ResultadosSorteosDTO;
 import edu.innova.webapp.dtos.SorteoRequestDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 
@@ -97,13 +98,15 @@ public class ServicioUsuariosAppSwingImpl implements ServicioUsuarios {
         return clienteUsuarios.getGanadoresDelSorteo(idFuncion, premios);
     }
     
-//    @Override
+    @Override
     public void registrarGanadores(Long idFuncion, List<Long> idUsuarios, String premioDeFuncion) {
         SorteoRequestDTO request = new SorteoRequestDTO(idUsuarios, idFuncion, premioDeFuncion);
-//        private List<Long> idUsuarios;
-//    private Long idFuncion;
-//    private String premio;
         clienteUsuarios.altaGanadoresSorteo(request);
+    }
+    
+    @Override
+    public List<ResultadosSorteosDTO> getSorteosGanados(String email) {
+        return clienteUsuarios.getPremiosGanadosDelEspectador(email);
     }
     
 

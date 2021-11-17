@@ -1,3 +1,4 @@
+<%@page import="edu.innova.webapp.dtos.ResultadosSorteosDTO"%>
 <%@page import="edu.innova.webapp.dtos.FuncionDTO"%>
 <%@page import="edu.innova.webapp.dtos.PaqueteDTO"%>
 <%@page import="java.util.ArrayList"%>
@@ -29,6 +30,7 @@
     List<FuncionDTO> funcionesFavoritas = ServletPaquete.getFuncionesFavoritasDeUsuario(u.getId());
 
     List<EspectaculoDTO> espectaculosFavoritos = ServletInformacionUsuario.getEspectaculosFavoritosDelUsuario(u.getId());
+    List<ResultadosSorteosDTO> sorteosGanados = ServletInformacionUsuario.getSorteosGanados(u.getEmail());
 
 %>
 <!DOCTYPE html>
@@ -347,6 +349,38 @@
                                             <p class="mb-0 text-xs">Descuento: <%=i.getDescuento()%> %</p>
                                         </div>
                                         <a class="btn btn-link pe-3 ps-0 mb-0 ms-auto" href="/webV2/paquete/detalle.jsp?idPaquete=<%=i.getId()%>">Ver detalles</a>
+                                    </li>
+                                    <% }
+                                        }%>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-xl-4">
+                        <div class="card h-100">
+                            <div class="card-header pb-0 p-3">
+                                <h6 class="mb-0" style="background-color: wheat">Mis Sorteos ganados</h6>
+                            </div>
+                            <div class="card-body p-3">
+                                <ul class="list-group">
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3" style="width: 50%;">
+                                            <h2 class="mb-0 text-sm">Función</h2>
+                                        </div>
+                                        <div class="avatar me-3" style="width: 50%;">
+                                            <h2 class="mb-0 text-sm">Premio</h2>
+                                        </div>
+                                    </li>
+                                    <% if (sorteosGanados.size() > 0) {
+                                            for (ResultadosSorteosDTO i : sorteosGanados) {
+                                    %>
+                                    <li class="list-group-item border-0 d-flex align-items-center px-0 mb-2">
+                                        <div class="avatar me-3" style="width: 50%;">
+                                            <h6 class="mb-0 text-sm"><%=i.getNombreFuncion()%></h6>
+                                        </div>
+                                        <div class="avatar me-3" style="width: 50%;">
+                                            <h6 class="mb-0 text-sm"><%=i.getPremio()%></h6>
+                                        </div>
                                     </li>
                                     <% }
                                         }%>

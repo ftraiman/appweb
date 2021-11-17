@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="edu.innova.webapp.helpers.HelperFechas"%>
 <%@page import="java.util.List"%>
 <%@page import="edu.innova.webapp.helpers.Constantes"%>
@@ -19,10 +20,21 @@
     Long idUsuario = usuarioLogueado.getId();
     InformacionFuncionDTO infoFuncion = ServletFuncion.getInformacionFuncion(idFuncion, request);
 
-    List<UsuarioDTO> usuariosEnFuncion = ServletFuncion.getUsuariosEnFuncion(idFuncion);
-    List<UsuarioDTO> usuariosGanadores = ServletFuncion.getGanadoresDelSorteo(idFuncion, 2);
-//    ServletFuncion.registrarGanadoresDelSorteo(idFuncion, idUsuarios, infoFuncion.getFuncion().getDescripcionPremios());
-
+    List<UsuarioDTO> usuariosEnFuncion = new ArrayList<>();
+    List<UsuarioDTO> usuariosGanadores = new ArrayList<>();
+    try {
+        usuariosEnFuncion = ServletFuncion.getUsuariosEnFuncion(idFuncion);
+        usuariosGanadores = ServletFuncion.getGanadoresDelSorteo(idFuncion, 2);
+        List<Long> idUsuarios = new ArrayList<>();
+        for (UsuarioDTO usuario : usuariosGanadores) {
+            idUsuarios.add(usuario.getId());
+        }
+        ServletFuncion.registrarGanadoresDelSorteo(idFuncion, idUsuarios, infoFuncion.getFuncion().getDescripcionPremios());
+        
+        request.setAttribute(Constantes.MENSAJE, String.format("El concurso se proceso correctamente"));
+    } catch (Exception e) {
+        request.setAttribute(Constantes.ERROR, String.format("Error al procesar concurso [%s]", e.getMessage()));
+    }
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,6 +68,16 @@
             <%@include file="../common/header.jsp" %>
             <!-- End Navbar -->
             <div class="container-fluid py-4">
+                <%  if (request.getAttribute(Constantes.ERROR) != null) {%>
+                <div class="alert alert-warning" role="alert">
+                    <%= request.getAttribute(Constantes.ERROR)%>
+                </div>
+                <%  } %>
+                <%  if (request.getAttribute(Constantes.MENSAJE) != null) {%>
+                <div class="alert alert-success" role="alert">
+                    <%= request.getAttribute(Constantes.MENSAJE)%>
+                </div>
+                <%  }%>
                 <div class="row">
                     <div class="col-12">
                         <div class="card mb-4">

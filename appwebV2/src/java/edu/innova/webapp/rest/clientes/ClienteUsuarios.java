@@ -73,9 +73,9 @@ public class ClienteUsuarios extends AbstractRest {
         return (RespuestaDTO) postEntity(USUARIOS_REGISTRO_ALTA_GANADORES_DE_SORTEO, request, RespuestaDTO.class);
     }
     
-    public List<ResultadosSorteosDTO> getPremiosEspectadores(String email) {
+    public List<ResultadosSorteosDTO> getPremiosGanadosDelEspectador(String email) {
 //        USUARIOS_PREMIOS_GANADOS =  PATH_USUARIOS + "/sorteo/ganador/%s";
-        String path = String.format(USUARIOS_GANADORES_DE_SORTEO, email);
+        String path = String.format(USUARIOS_PREMIOS_GANADOS, email);
         return getEntities(path, TIPO_LISTA_RESULTADO_SORTEO);
     }
     

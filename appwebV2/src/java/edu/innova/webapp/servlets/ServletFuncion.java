@@ -82,7 +82,7 @@ public class ServletFuncion extends HttpServlet {
             servicioEspectaculos.altaFuncion(nuevaFuncion);
             req.getRequestDispatcher(String.format("espectaculo/detalle.jsp?idEspectaculo=%s", idEspectaculo)).forward(req, resp);
         } catch (Exception e) {
-            req.setAttribute("error", e.getMessage());
+            req.setAttribute(Constantes.ERROR, e.getMessage());
             req.getRequestDispatcher("funcion/alta.jsp").forward(req, resp);
             return;
         }

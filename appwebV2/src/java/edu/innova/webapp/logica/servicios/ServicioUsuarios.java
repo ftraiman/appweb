@@ -1,6 +1,7 @@
 package edu.innova.webapp.logica.servicios;
 
 
+import edu.innova.webapp.dtos.ResultadosSorteosDTO;
 import edu.innova.webapp.dtos.UsuarioDTO;
 import java.util.List;
 
@@ -22,5 +23,7 @@ public interface ServicioUsuarios {
     List<UsuarioDTO> getGanadoresDelSorteo(Long idFuncion, Integer premios);
     
     void registrarGanadores(Long idFuncion, List<Long> idUsuarios, String premioDeFuncion);
+    
+    List<ResultadosSorteosDTO> getSorteosGanados(String email);
     
 }
